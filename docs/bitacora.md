@@ -29,11 +29,11 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 [x] Historia #4: Listado de categorías en el Home (Maquetación inicial).
 
-[ ] Historia #5: Página de Detalle de Producto (En desarrollo).
+[x] Historia #5: Página de Detalle de Producto (En desarrollo).
 
-[ ] Historia #6: Galería de imágenes para el detalle (Pendiente).
+[x] Historia #6: Galería de imágenes para el detalle (Pendiente).
 
-[ ] Historia #7: Footer con información de copyright e identidad de marca.
+[x] Historia #7: Footer con información de copyright e identidad de marca.
 
 [x] Historia #8: Buscador funcional en el Home (Input de destino y fechas).
 
@@ -43,7 +43,7 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 [x] Historia #11: Funcionalidad de eliminación de productos con confirmación (window.confirm).
 
-🎨 4. Interfaz y UX
+
 Estética: Diseño Premium Dark con paleta dorada (#dbb155) y gris oscuro (#272a2a).
 
 Componentización: Código refactorizado en carpetas /pages y /components.
@@ -51,3 +51,11 @@ Componentización: Código refactorizado en carpetas /pages y /components.
 Lógica de datos: Implementación de `ORDER BY RAND()` en Backend y `slice()` en Frontend para la paginación.
 
 Validaciones: Control de errores 400 (Bad Request) para duplicados y 200 (OK) para borrados exitosos.
+
+Actividad: Implementación de la Vista de Detalle de Producto.
+
+Problemas encontrados: Error 405 (Method Not Allowed) al intentar consumir el endpoint por ID debido a conflictos de rutas en Spring Boot.
+
+Solución: Se ajustó el @GetMapping en el Backend a /api/productos/detalle/{id} y se actualizó la llamada de Axios en el Frontend. Se aplicó CSS Grid para cumplir con la maqueta de 5 imágenes.
+
+Estado: Finalizado y funcional.

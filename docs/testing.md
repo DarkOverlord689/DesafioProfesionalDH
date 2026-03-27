@@ -56,3 +56,66 @@ Aceptar el cuadro de diálogo de confirmación (window.confirm).
 Resultado Esperado: El registro desaparece de la tabla y se elimina de la base de datos MySQL.
 
 Estado: ✅ Pasó.
+
+5. Prueba de Cabecera Dinámica (Historia #5)
+Escenario: Verificar que la cabecera del detalle muestra la información correcta del producto seleccionado.
+
+Pasos: Clic en "Ver detalle" de un hotel, observar título y categoría.
+
+Resultado Esperado: Los datos deben coincidir exactamente con el ID seleccionado desde la base de datos.
+
+Estado: ✅ Pasó.
+
+6. Prueba de Botón de Retorno (Historia #5)
+Escenario: Validar la navegación hacia atrás desde la vista de detalle.
+
+Pasos: Estando en la vista de detalle, hacer clic en el botón "❮ Volver".
+
+Resultado Esperado: El sistema debe utilizar el historial del navegador (useNavigate(-1)) para regresar al Home sin recargar.
+
+Estado: ✅ Pasó.
+
+7. Prueba de Galería de 5 Imágenes (Historia #6)
+Escenario: Validar la disposición visual de la galería requerida por el cliente.
+
+Pasos: Abrir cualquier producto y contar las imágenes en pantalla.
+
+Resultado Esperado: Se visualiza 1 imagen principal grande y 4 imágenes secundarias en una grilla lateral.
+
+Estado: ✅ Pasó.
+
+8. Prueba de Overlay "Ver más" (Historia #6)
+Escenario: Verificar la presencia del texto de expansión en la galería.
+
+Pasos: Observar la última imagen de la grilla secundaria (esquina inferior derecha).
+
+Resultado Esperado: La imagen debe tener un fondo oscurecido con el texto "Ver más" o "+2 Fotos".
+
+Estado: ✅ Pasó.
+
+9. Prueba de Integración de Endpoints (Backend)
+Escenario: Consumo del nuevo endpoint específico para detalle por ID.
+
+Pasos: Revisar la pestaña "Network" del navegador al cargar un producto.
+
+Resultado Esperado: La petición se realiza a /api/productos/detalle/{id} devolviendo un JSON con estado 200.
+
+Estado: ✅ Pasó.
+
+10. Prueba de Consistencia de Datos
+Escenario: Asegurar que los datos mostrados en el Home coinciden con el Detalle.
+
+Pasos: Anotar el nombre de un hotel en el Home y entrar a su detalle.
+
+Resultado Esperado: Toda la información (nombre, descripción, imagen) debe ser consistente entre ambas vistas.
+
+Estado: ✅ Pasó.
+
+11. Prueba de Diseño Responsivo
+Escenario: Verificar el comportamiento de la vista de detalle en dispositivos móviles.
+
+Pasos: Abrir las herramientas de desarrollador y activar la vista "Mobile" (iPhone/Android).
+
+Resultado Esperado: La galería de imágenes debe apilarse correctamente y el botón de volver debe seguir siendo accesible.
+
+Estado: ✅ Pasó.
