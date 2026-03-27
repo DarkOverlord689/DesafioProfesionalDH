@@ -25,47 +25,73 @@ const Administracion = () => {
   };
 
   const handleEliminar = async (id) => {
-    // 1. Esto lanza el cartel de confirmación
-    const confirmar = window.confirm("¿Estás seguro de que querés borrar este producto?");
-
-    if (confirmar) {
+    if (window.confirm("¿Seguro que quieres eliminar este producto?")) {
       try {
-        // 2. Usar comillas invertidas ` ` NO comillas simples ' '
         await axios.delete(`http://localhost:8080/api/productos/${id}`);
-
-        alert("🗑️ Producto borrado con éxito");
-
-        // 3. Volver a cargar la lista para que desaparezca de la pantalla
+        alert("🗑️ Eliminado");
         cargar();
-      } catch (error) {
-        console.error(error);
-        alert("No se pudo eliminar el producto");
+      } catch (err) {
+        alert("Error al eliminar");
       }
     }
   };
 
   return (
-    <div style={{ padding: '40px', color: 'white' }}>
-      <h1>Administración</h1>
-      <form onSubmit={handleCrear} style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxWidth: '400px', marginBottom: '40px' }}>
-        <input type="text" placeholder="Nombre" value={nuevo.nombre} onChange={e => setNuevo({ ...nuevo, nombre: e.target.value })} required />
-        <input type="text" placeholder="Categoría" value={nuevo.categoria} onChange={e => setNuevo({ ...nuevo, categoria: e.target.value })} required />
-        <textarea placeholder="Descripción" value={nuevo.descripcion} onChange={e => setNuevo({ ...nuevo, descripcion: e.target.value })} required />
-        <input type="text" placeholder="URL Imagen" value={nuevo.imagenUrl} onChange={e => setNuevo({ ...nuevo, imagenUrl: e.target.value })} required />
-        <button type="submit" className="btn-primary">Guardar Producto</button>
+    <div className="admin-container">
+      <form className="admin-form" onSubmit={handleCrear}>
+        <h2>Registrar Nuevo Producto</h2>
+        <input 
+          className="admin-input" 
+          type="text" 
+          placeholder="Nombre" 
+          value={nuevo.nombre} 
+          onChange={e => setNuevo({...nuevo, nombre: e.target.value})} 
+          required 
+        />
+        <input 
+          className="admin-input" 
+          type="text" 
+          placeholder="Categoría" 
+          value={nuevo.categoria} 
+          onChange={e => setNuevo({...nuevo, categoria: e.target.value})} 
+          required 
+        />
+        <textarea 
+          className="admin-input" 
+          placeholder="Descripción" 
+          value={nuevo.descripcion} 
+          onChange={e => setNuevo({...nuevo, descripcion: e.target.value})} 
+          required 
+        />
+        <input 
+          className="admin-input" 
+          type="text" 
+          placeholder="URL Imagen" 
+          value={nuevo.imagenUrl} 
+          onChange={e => setNuevo({...nuevo, imagenUrl: e.target.value})} 
+          required 
+        />
+        <button type="submit" className="btn-save">Guardar Producto</button>
       </form>
 
-      <table style={{ width: '100%', backgroundColor: '#272a2a', textAlign: 'left' }}>
+      <table className="admin-table">
         <thead>
-          <tr style={{ color: '#dbb155' }}>
-            <th>ID</th><th>Nombre</th><th>Acciones</th>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           {productos.map(p => (
             <tr key={p.id}>
-              <td>{p.id}</td><td>{p.nombre}</td>
-              <td><button onClick={() => handleEliminar(p.id)} style={{ background: 'red', color: 'white', border: 'none', cursor: 'pointer' }}>Eliminar</button></td>
+              <td>{p.id}</td>
+              <td>{p.nombre}</td>
+              <td>
+                <button className="btn-delete" onClick={() => handleEliminar(p.id)}>
+                  Eliminar
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
