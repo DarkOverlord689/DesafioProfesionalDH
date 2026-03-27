@@ -4,8 +4,10 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <p>© 2026 DARKSISHOP - Todos los derechos reservados</p>
-        <p>Proyecto Integrador - Digital House</p>
+        <p>© 2026 DARKSISHOP - Sentite como en tu hogar</p>
+        <div className="social-icons">
+          <span>FB</span> <span>IG</span>
+        </div>
       </div>
     </footer>
   );
