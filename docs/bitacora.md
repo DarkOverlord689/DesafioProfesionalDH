@@ -33,7 +33,7 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 [ ] Historia #6: Galería de imágenes para el detalle (Pendiente).
 
-[x] Historia #7: Footer con información de copyright e identidad de marca.
+[ ] Historia #7: Footer con información de copyright e identidad de marca.
 
 [x] Historia #8: Buscador funcional en el Home (Input de destino y fechas).
 
@@ -47,5 +47,7 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 Estética: Diseño Premium Dark con paleta dorada (#dbb155) y gris oscuro (#272a2a).
 
 Componentización: Código refactorizado en carpetas /pages y /components.
+
+Lógica de datos: Implementación de `ORDER BY RAND()` en Backend y `slice()` en Frontend para la paginación.
 
 Validaciones: Control de errores 400 (Bad Request) para duplicados y 200 (OK) para borrados exitosos.
