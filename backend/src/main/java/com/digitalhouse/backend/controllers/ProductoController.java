@@ -53,4 +53,14 @@ public class ProductoController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/buscar/categoria/{cat}")
+    public List<Producto> filtrar(@PathVariable String cat) {
+        return productoRepository.findByCategoriaIgnoreCase(cat);
+    }
+
+    @GetMapping("/buscar/nombre")
+    public List<Producto> buscar(@RequestParam String nombre) {
+        return productoRepository.findByNombreContainingIgnoreCase(nombre);
+    }
 }
