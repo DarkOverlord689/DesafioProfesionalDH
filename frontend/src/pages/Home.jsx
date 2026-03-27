@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const CATEGORIAS_MOCK = [
   { id: 1, nombre: 'Hoteles', img: 'https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg' },
@@ -76,7 +77,9 @@ const Home = () => {
                 </div>
                 <h3>{p.nombre}</h3>
                 <p className="description">{p.descripcion}</p>
-                <button className="btn-detail">Ver detalle</button>
+                <Link to={`/producto/${p.id}`} className="btn-detail">
+                  Ver detalle
+                </Link>
               </div>
             </div>
           ))}
@@ -84,22 +87,22 @@ const Home = () => {
 
         {/* --- CONTROLES DE PAGINACIÓN (HU #8) --- */}
         <div className="pagination-controls">
-          <button 
-            onClick={() => setPaginaActual(1)} 
+          <button
+            onClick={() => setPaginaActual(1)}
             disabled={paginaActual === 1}
             className="btn-pag"
           > Inicio </button>
-          
-          <button 
-            onClick={() => setPaginaActual(prev => prev - 1)} 
+
+          <button
+            onClick={() => setPaginaActual(prev => prev - 1)}
             disabled={paginaActual === 1}
             className="btn-pag"
           > Anterior </button>
 
           <span className="page-number">Página {paginaActual}</span>
 
-          <button 
-            onClick={() => setPaginaActual(prev => prev + 1)} 
+          <button
+            onClick={() => setPaginaActual(prev => prev + 1)}
             disabled={indiceUltimo >= productos.length}
             className="btn-pag"
           > Siguiente </button>

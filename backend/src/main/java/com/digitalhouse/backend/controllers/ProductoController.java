@@ -63,4 +63,11 @@ public class ProductoController {
     public List<Producto> buscar(@RequestParam String nombre) {
         return productoRepository.findByNombreContainingIgnoreCase(nombre);
     }
+
+    @GetMapping("/detalle/{id}")
+    public ResponseEntity<Producto> obtenerPorId(@PathVariable Long id) {
+        return productoRepository.findById(id)
+                .map(producto -> ResponseEntity.ok(producto))
+                .orElse(ResponseEntity.notFound().build());
+    }
 }
