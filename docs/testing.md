@@ -4,38 +4,55 @@ Escenario: Intentar registrar un producto con un nombre que ya existe en la base
 
 Pasos:
 
-Ir a /administracion. (Panel Admin)
+Ir a /administracion.
 
-Ingresar "Hotel Darksishi Central" (nombre ya existente).
+Ingresar un nombre ya existente (ej: "Hotel Darksishi Central").
 
-Completar los demás campos y dar clic en "Guardar".
+Completar campos y dar clic en "Guardar".
 
-Resultado Esperado: El sistema debe bloquear la inserción y mostrar un mensaje: "Error: El nombre ya existe".
+Resultado Esperado: El sistema debe bloquear la inserción (Error 400 en Backend) y no duplicar el registro.
 
 Estado: ✅ Pasó.
 
-2. Prueba de Persistencia (CRUD)
-Escenario: Crear un nuevo producto y verificar que se visualiza en la tabla.
+2. Prueba de Estructura de Grilla y Aleatoriedad (Historia #4)
+Escenario: Verificar la disposición visual y la carga aleatoria de productos.
 
 Pasos:
 
-Ingresar un producto nuevo (ej: "Resort El Sol").
+Entrar al Home.
 
-Verificar que aparezca una nueva fila en la tabla de administración.
+Contar productos y disposición.
 
-Resultado Esperado: El producto debe guardarse en MySQL y renderizarse en el Front.
+Recargar la página (F5).
+
+Resultado Esperado: Se visualizan exactamente 2 columnas y 5 filas (10 productos). Al recargar, el orden de los productos debe cambiar.
 
 Estado: ✅ Pasó.
 
-3. Prueba de Eliminación (Historia #11)
-Escenario: Borrar un producto existente.
+3. Prueba de Paginación Funcional (Historia #8)
+Escenario: Navegar a través del catálogo limitado a 10 ítems.
+
+Pasos:
+
+Verificar que solo hay 10 productos visibles.
+
+Clic en botón "Siguiente".
+
+Clic en botón "Inicio".
+
+Resultado Esperado: El sistema debe mostrar los siguientes 10 productos. El botón "Inicio" debe resetear al usuario a la primera página. Los botones se deshabilitan correctamente en los límites.
+
+Estado: ✅ Pasó.
+
+4. Prueba de Eliminación con Confirmación (Historia #11)
+Escenario: Borrar un producto existente desde el panel de administración.
 
 Pasos:
 
 Clic en el botón "Eliminar" de un registro.
 
-Aceptar el cuadro de diálogo de confirmación.
+Aceptar el cuadro de diálogo de confirmación (window.confirm).
 
-Resultado Esperado: El registro debe desaparecer de la tabla y ser borrado de la base de datos MySQL.
+Resultado Esperado: El registro desaparece de la tabla y se elimina de la base de datos MySQL.
 
 Estado: ✅ Pasó.
