@@ -93,158 +93,149 @@ const Administracion = () => {
 
   const [tabActiva, setTabActiva] = useState('productos');
   const styles = {
-  tabActive: { padding: '10px 20px', backgroundColor: '#1DB954', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' },
-  tabInactive: { padding: '10px 20px', backgroundColor: '#444', color: '#ccc', border: 'none', borderRadius: '5px', cursor: 'pointer' }
+    tabActive: { padding: '10px 20px', backgroundColor: '#1DB954', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' },
+    tabInactive: { padding: '10px 20px', backgroundColor: '#444', color: '#ccc', border: 'none', borderRadius: '5px', cursor: 'pointer' }
   };
 
-  return (
+  const [nuevaChar, setNuevaChar] = useState({ nombre: '', icono: '' });
+
+  const handleCharSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post('http://localhost:8080/api/caracteristicas', nuevaChar);
+      alert("¡Característica añadida con éxito!");
+      setNuevaChar({ nombre: '', icono: '' }); // Limpiar
+
+      // Actualizar la lista global para que el formulario de productos se entere
+      const res = await axios.get('http://localhost:8080/api/caracteristicas');
+      setCaracteristicas(res.data);
+    } catch (error) {
+      console.error("Error", error);
+      alert("No se pudo guardar la característica");
+    }
+  };
+
+  const eliminarElemento = async (tipo, id) => {
+    if (window.confirm(`¿Seguro que quieres eliminar este ${tipo}?`)) {
+      try {
+        await axios.delete(`http://localhost:8080/api/${tipo}/${id}`);
+        alert("Eliminado correctamente");
+        // Recargar la página o filtrar el estado para que desaparezca visualmente
+        window.location.reload();
+      } catch (error) {
+        alert("No se puede eliminar: el elemento está siendo usado por un producto.");
+      }
+    }
+  };
+
+return (
     <div className="admin-container">
       <h1 className="admin-title">Panel de Administración</h1>
 
-      {/* --- SELECTOR DE PESTAÑAS (TABS) --- */}
+      {/* 1. NAVEGACIÓN (TABS) */}
       <div className="admin-tabs">
-        <button 
-          type="button"
-          className={`btn-tab ${tabActiva === 'productos' ? 'active' : ''}`}
-          onClick={() => setTabActiva('productos')}
-        >
-          Gestionar Productos
-        </button>
-        <button 
-          type="button"
-          className={`btn-tab ${tabActiva === 'categorias' ? 'active' : ''}`}
-          onClick={() => setTabActiva('categorias')}
-        >
-          Gestionar Categorías
-        </button>
+        {['productos', 'categorias', 'caracteristicas'].map((tab) => (
+          <button
+            key={tab}
+            type="button"
+            className={`btn-tab ${tabActiva === tab ? 'active' : ''}`}
+            onClick={() => setTabActiva(tab)}
+          >
+            Gestionar {tab.charAt(0).toUpperCase() + tab.slice(1)}
+          </button>
+        ))}
       </div>
 
-      {/* --- CONTENIDO DINÁMICO SEGÚN LA PESTAÑA --- */}
+      {/* 2. FORMULARIOS DINÁMICOS Y LISTAS DE BORRADO */}
       <div className="admin-forms-wrapper">
-        {tabActiva === 'productos' ? (
-          /* FORMULARIO DE PRODUCTOS (HU #12 y #17) */
+        
+        {/* PESTAÑA PRODUCTOS */}
+        {tabActiva === 'productos' && (
           <form className="admin-form" onSubmit={handleCrear}>
             <h2>Registrar Nuevo Producto</h2>
-
-            <input 
-              className="admin-input" 
-              type="text" 
-              placeholder="Nombre del Producto" 
-              value={nuevo.nombre} 
-              onChange={e => setNuevo({ ...nuevo, nombre: e.target.value })} 
-              required 
-            />
-
-            <select
-              className="admin-input"
-              value={nuevo.categoria.id}
-              onChange={e => setNuevo({ ...nuevo, categoria: { id: e.target.value } })}
-              required
-            >
+            <input className="admin-input" type="text" placeholder="Nombre" value={nuevo.nombre} onChange={e => setNuevo({ ...nuevo, nombre: e.target.value })} required />
+            <select className="admin-input" value={nuevo.categoria.id} onChange={e => setNuevo({ ...nuevo, categoria: { id: e.target.value } })} required>
               <option value="">Selecciona una Categoría</option>
-              {categorias.map(cat => (
-                <option key={cat.id} value={cat.id}>{cat.titulo}</option>
-              ))}
+              {categorias.map(cat => <option key={cat.id} value={cat.id}>{cat.titulo}</option>)}
             </select>
-
-            <textarea 
-              className="admin-input" 
-              placeholder="Descripción detallada" 
-              value={nuevo.descripcion} 
-              onChange={e => setNuevo({ ...nuevo, descripcion: e.target.value })} 
-              required 
-            />
-
-            <input 
-              className="admin-input" 
-              type="text" 
-              placeholder="URL de la Imagen" 
-              value={nuevo.imagenUrl} 
-              onChange={e => setNuevo({ ...nuevo, imagenUrl: e.target.value })} 
-              required 
-            />
-
-            <div className="caracteristicas-selector">
-              <p>Características disponibles:</p>
-              <div className="caracteristicas-grid">
-                {caracteristicas.map(car => (
-                  <label key={car.id} className="caracteristica-label">
-                    <input
-                      type="checkbox"
-                      checked={nuevo.caracteristicas.some(item => item.id === car.id)}
-                      onChange={() => handleCheckboxChange(car.id)}
-                    /> {car.nombre}
-                  </label>
-                ))}
-              </div>
+            <textarea className="admin-input" placeholder="Descripción" value={nuevo.descripcion} onChange={e => setNuevo({ ...nuevo, descripcion: e.target.value })} required />
+            <input className="admin-input" type="text" placeholder="URL Imagen" value={nuevo.imagenUrl} onChange={e => setNuevo({ ...nuevo, imagenUrl: e.target.value })} required />
+            <div className="caracteristicas-grid">
+              {caracteristicas.map(car => (
+                <label key={car.id} className="caracteristica-label">
+                  <input type="checkbox" checked={nuevo.caracteristicas.some(item => item.id === car.id)} onChange={() => handleCheckboxChange(car.id)} /> {car.nombre}
+                </label>
+              ))}
             </div>
-
             <button type="submit" className="btn-save">Guardar Producto</button>
           </form>
-        ) : (
-          /* FORMULARIO DE CATEGORÍAS (HU #21) */
-          <form className="admin-form" onSubmit={handleCategoriaSubmit}>
-            <h2>Registrar Nueva Categoría</h2>
+        )}
 
-            <input
-              className="admin-input"
-              type="text"
-              placeholder="Título de Categoría (Ej: Hoteles)"
-              value={nuevaCategoria.titulo}
-              onChange={e => setNuevaCategoria({ ...nuevaCategoria, titulo: e.target.value })}
-              required
-            />
+        {/* PESTAÑA CATEGORÍAS (Formulario + Lista para borrar) */}
+        {tabActiva === 'categorias' && (
+          <div className="admin-tab-content">
+            <form className="admin-form" onSubmit={handleCategoriaSubmit}>
+              <h2>Nueva Categoría</h2>
+              <input className="admin-input" type="text" placeholder="Título" value={nuevaCategoria.titulo} onChange={e => setNuevaCategoria({ ...nuevaCategoria, titulo: e.target.value })} required />
+              <textarea className="admin-input" placeholder="Descripción" value={nuevaCategoria.descripcion} onChange={e => setNuevaCategoria({ ...nuevaCategoria, descripcion: e.target.value })} required />
+              <input className="admin-input" type="text" placeholder="URL Imagen" value={nuevaCategoria.imagenUrl} onChange={e => setNuevaCategoria({ ...nuevaCategoria, imagenUrl: e.target.value })} required />
+              <button type="submit" className="btn-save">Crear Categoría</button>
+            </form>
 
-            <textarea
-              className="admin-input"
-              placeholder="Descripción de la categoría"
-              value={nuevaCategoria.descripcion}
-              onChange={e => setNuevaCategoria({ ...nuevaCategoria, descripcion: e.target.value })}
-              required
-            />
+            <div className="admin-items-list">
+              <h3>Categorías Existentes</h3>
+              {categorias.map(cat => (
+                <div key={cat.id} className="admin-item-row">
+                  <span>{cat.titulo}</span>
+                  <button className="btn-delete-small" onClick={() => eliminarElemento('categorias', cat.id)}>Eliminar</button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
-            <input
-              className="admin-input"
-              type="text"
-              placeholder="URL Imagen (Icono o Representación)"
-              value={nuevaCategoria.imagenUrl}
-              onChange={e => setNuevaCategoria({ ...nuevaCategoria, imagenUrl: e.target.value })}
-              required
-            />
+        {/* PESTAÑA CARACTERÍSTICAS (Formulario + Lista para borrar) */}
+        {tabActiva === 'caracteristicas' && (
+          <div className="admin-tab-content">
+            <form className="admin-form" onSubmit={handleCharSubmit}>
+              <h2>Nueva Característica</h2>
+              <input className="admin-input" type="text" placeholder="Nombre (WiFi)" value={nuevaChar.nombre} onChange={e => setNuevaChar({ ...nuevaChar, nombre: e.target.value })} required />
+              <input className="admin-input" type="text" placeholder="Icono (fa-wifi)" value={nuevaChar.icono} onChange={e => setNuevaChar({ ...nuevaChar, icono: e.target.value })} required />
+              <button type="submit" className="btn-save">Guardar Característica</button>
+            </form>
 
-            <button type="submit" className="btn-save btn-categoria">
-              Crear Categoría
-            </button>
-          </form>
+            <div className="admin-items-list">
+              <h3>Características Existentes</h3>
+              {caracteristicas.map(car => (
+                <div key={car.id} className="admin-item-row">
+                  <span><i className={`fas ${car.icono}`}></i> {car.nombre}</span>
+                  <button className="btn-delete-small" onClick={() => eliminarElemento('caracteristicas', car.id)}>Eliminar</button>
+                </div>
+              ))}
+            </div>
+          </div>
         )}
       </div>
 
-      {/* --- LISTADO GLOBAL DE PRODUCTOS --- */}
-      <div className="admin-table-section">
-        <h2 className="table-title">Productos en Inventario</h2>
-        <table className="admin-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Categoría</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {productos.map(p => (
-              <tr key={p.id}>
-                <td>{p.id}</td>
-                <td>{p.nombre}</td>
-                <td>{p.categoria?.titulo || "Sin categoría"}</td>
-                <td>
-                  <button className="btn-delete" onClick={() => handleEliminar(p.id)}>Eliminar</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {/* 3. TABLA DE PRODUCTOS */}
+      {tabActiva === 'productos' && (
+        <div className="admin-table-section">
+          <h2 className="table-title">Productos en Inventario</h2>
+          <table className="admin-table">
+            <thead>
+              <tr><th>ID</th><th>Nombre</th><th>Categoría</th><th>Acciones</th></tr>
+            </thead>
+            <tbody>
+              {productos.map(p => (
+                <tr key={p.id}>
+                  <td>{p.id}</td><td>{p.nombre}</td><td>{p.categoria?.titulo || "---"}</td>
+                  <td><button className="btn-delete" onClick={() => handleEliminar(p.id)}>Eliminar</button></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

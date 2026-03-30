@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/categorias")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class CategoriaController {
 
     @Autowired
@@ -23,5 +23,10 @@ public class CategoriaController {
     @PostMapping
     public Categoria crear(@RequestBody Categoria categoria) {
         return categoriaRepository.save(categoria);
+    }
+
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable Long id) {
+        categoriaRepository.deleteById(id);
     }
 }

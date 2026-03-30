@@ -162,3 +162,37 @@ Observar que el formulario cambie sin recargar la página.
 Resultado Esperado: El botón activo debe resaltar en verde (#1DB954) y el formulario anterior debe ocultarse por completo.
 
 Estado: ✅ Pasó.
+
+15. Prueba de Registro de Atributos (Historia #17)
+Escenario: Crear una característica nueva (ej: WiFi) con su icono de FontAwesome.
+Pasos:
+
+En la pestaña "Gestionar Características", ingresar "WiFi" en nombre y "fa-wifi" en icono.
+
+Hacer clic en "Guardar Característica".
+
+Verificar la aparición del elemento en la lista inferior y en el formulario de Productos.
+Resultado Esperado: La característica debe guardarse en la DB y aparecer inmediatamente como un checkbox disponible para nuevos productos.
+Estado: ✅ Pasó.
+
+16. Prueba de Borrado con Integridad Referencial
+Escenario: Intentar eliminar una categoría que contiene productos registrados.
+Pasos:
+
+Intentar borrar la categoría "Hoteles" desde la lista de "Categorías Existentes".
+
+Observar el mensaje de error en pantalla.
+Resultado Esperado: El sistema debe capturar el error del Backend y mostrar un mensaje indicando que el elemento está siendo usado por un producto, impidiendo que la base de datos quede corrupta.
+Estado: ✅ Pasó.
+
+17. Prueba de Persistencia de Categorías (Historia #21)
+Escenario: Validar que una categoría creada manualmente aparezca en el selector de productos.
+Pasos:
+
+Crear la categoría "Departamentos" en su pestaña correspondiente.
+
+Cambiar a la pestaña "Gestionar Productos".
+
+Desplegar el selector de categorías.
+Resultado Esperado: "Departamentos" debe figurar en el listado para ser asignado a cualquier nuevo producto.
+Estado: ✅ Pasó.

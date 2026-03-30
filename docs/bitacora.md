@@ -52,21 +52,21 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 Estética: Diseño Premium Dark con paleta dorada (#dbb155) y gris oscuro (#272a2a).
 
-Componentización: Código refactorizado en carpetas /pages y /components.
+Componentización: Código refactorizado en la página de Administración mediante renderizado condicional por pestañas.
 
-Lógica de datos: Implementación de `ORDER BY RAND()` en Backend y `slice()` en Frontend para la paginación.
+Lógica de datos: Implementación de controladores específicos para Categorías y Características en el Backend, vinculando objetos complejos (ManyToMany) mediante checkboxes en el Frontend.
 
-Validaciones: Control de errores 400 (Bad Request) para duplicados y 200 (OK) para borrados exitosos.
+Validaciones: Control de errores de integridad referencial (Foreign Key) para evitar el borrado de categorías o características que tengan productos activos vinculados.
 
 Actividad: Implementación de la Vista de Detalle de Producto.
 
-Problemas encontrados: Error 405 (Method Not Allowed) al intentar consumir el endpoint por ID debido a conflictos de rutas en Spring Boot.
+Problemas encontrados: Error de CORS (Access-Control-Allow-Origin) al intentar registrar nuevas características desde el puerto 5173 hacia el 8080 de Spring Boot.
 
-Solución: Se ajustó el @GetMapping en el Backend a /api/productos/detalle/{id} y se actualizó la llamada de Axios en el Frontend. Se aplicó CSS Grid para cumplir con la maqueta de 5 imágenes.
+Solución: Se añadió la anotación @CrossOrigin(origins = "http://localhost:5173") en CategoriaController y CaracteristicaController. Se implementó un sistema de borrado manual de productos previo al borrado de categorías para mantener la integridad de la DB.
 
 Arquitectura de UI: Implementación de un sistema de Tabs (Pestañas) en la página de Administración para organizar Productos, Categorías y Características sin sobrecargar la vista.
 
-Estado Global Local: Uso de useState para manejar el renderizado condicional de formularios y la actualización inmediata de los selectores tras crear nuevos atributos.
+Estado Global Local: Uso de useState para manejar el renderizado condicional de formularios (tabActiva) y useEffect para la actualización inmediata de los listados tras crear o eliminar nuevos atributos.
 
 Backend (Spring Boot): * Creación de CategoriaController y CaracteristicaController. Implementación de JpaRepository para las nuevas entidades. Habilitación de @CrossOrigin para permitir la comunicación fluida con React.
 
