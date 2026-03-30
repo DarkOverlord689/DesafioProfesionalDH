@@ -167,3 +167,63 @@
     width: 25px; /* Ancho fijo para alinear los iconos */
     text-align: center;
 }
+
+.detalle-caracteristicas-bloque {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+}
+
+.titulo-caracteristicas {
+    color: #eee;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.separador-dorado {
+    border: 0;
+    height: 3px;
+    background: #dbb155;
+    width: 50px;
+    margin: 0 0 25px 0;
+}
+
+/* ➔ Criterio: Responsivo (Grid que se adapta) */
+.caracteristicas-grid-final {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.caracteristica-item-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+}
+
+.icon-estilo {
+    color: #dbb155;
+    font-size: 1.2rem;
+    width: 25px;
+    text-align: center;
+}
+
+.char-name {
+    color: #ccc;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .caracteristicas-grid-final {
+        grid-template-columns: 1fr 1fr; /*tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .caracteristicas-grid-final {
+        grid-template-columns: 1fr; /*móviles */
+    }
+}

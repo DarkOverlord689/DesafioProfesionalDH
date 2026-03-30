@@ -54,16 +54,20 @@ const DetalleProducto = () => {
             <section className="detalle-body">
                 <h2>Descripción del alojamiento</h2>
                 <p className="descripcion-txt">{producto.descripcion}</p>
-                
-                {/* --- ESTO ES LO NUEVO DEL SPRINT 2 --- */}
+
+                {/* --- SPRINT 2 --- */}
                 {producto.caracteristicas && producto.caracteristicas.length > 0 && (
-                    <div className="detalle-caracteristicas">
-                        <h3>¿Qué ofrece este lugar?</h3>
-                        <div className="caracteristicas-grid">
+                    <div className="detalle-caracteristicas-bloque">
+                        {/* ➔ Criterio: Título “Características” */}
+                        <h2 className="titulo-caracteristicas">Características</h2>
+                        <hr className="separador-dorado" />
+
+                        {/* ➔ Criterio: Listar con iconos y responsividad */}
+                        <div className="caracteristicas-grid-final">
                             {producto.caracteristicas.map(car => (
-                                <div key={car.id} className="caracteristica-item">
-                                    <i className={`fas ${car.icono}`} title={car.nombre}></i> 
-                                    <span>{car.nombre}</span>
+                                <div key={car.id} className="caracteristica-item-card">
+                                    <i className={`fas ${car.icono} icon-estilo`}></i>
+                                    <span className="char-name">{car.nombre}</span>
                                 </div>
                             ))}
                         </div>
