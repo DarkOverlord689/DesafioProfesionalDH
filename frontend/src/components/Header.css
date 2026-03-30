@@ -1,0 +1,126 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  background-color: #1a1a1a; /* Fondo oscuro pro */
+  border-bottom: 2px solid #dbb155; /* Línea dorada */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.logo-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #dbb155; /* Dorado */
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.slogan {
+  font-size: 0.8rem;
+  color: #ffffff;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+/* Estilos para los botones generales */
+.btn-secondary {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #dbb155;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #dbb155;
+  color: #1a1a1a;
+}
+
+/* Estilos del área de Usuario Logueado (HU #14) */
+.user-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 15px;
+  border-left: 1px solid #333;
+}
+
+.avatar-circle {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, #dbb155, #f3cf7a);
+  color: #1a1a1a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.1rem;
+  box-shadow: 0 0 10px rgba(219, 177, 85, 0.4);
+}
+
+.user-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome-msg {
+  font-size: 0.7rem;
+  color: #888;
+  text-transform: uppercase;
+}
+
+.user-name {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.btn-logout {
+  background: none;
+  border: none;
+  color: #ff4d4d; /* Color rojizo para salir */
+  cursor: pointer;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  padding: 0;
+  margin-left: 10px;
+}
+
+.btn-logout:hover {
+  color: #ff8080;
+}
+
+/* Responsive básico */
+@media (max-width: 768px) {
+  .slogan, .welcome-msg {
+    display: none;
+  }
+  .header {
+    padding: 1rem 3%;
+  }
+}

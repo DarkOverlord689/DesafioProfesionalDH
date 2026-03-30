@@ -1,5 +1,6 @@
 package com.digitalhouse.backend.services;
 
+import com.digitalhouse.backend.dto.LoginRequest;
 import com.digitalhouse.backend.models.Usuario;
 import com.digitalhouse.backend.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,20 @@ public class UsuarioService {
         }
 
         return usuarioGuardado;
+    }
+
+    public Usuario login(LoginRequest request) {
+        // 1. Buscar al usuario por email
+        Usuario usuario = usuarioRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // 2. Verificar la contraseña (suponiendo que usas BCrypt)
+        // Si NO usas encriptación aún, sería:
+        // if(usuario.getPassword().equals(request.getPassword()))
+        if (passwordEncoder.matches(request.getPassword(), usuario.getPassword())) {
+            return usuario;
+        } else {
+            throw new RuntimeException("Contraseña incorrecta");
+        }
     }
 }
