@@ -18,12 +18,15 @@ const Home = () => {
   const productosPorPagina = 10; // Criterio HU #8
 
   useEffect(() => {
-    // ORDER BY RAND(), llegan aleatorios (HU #4)
+    // Productos
     axios.get('http://localhost:8080/api/productos')
       .then(res => setProductos(res.data))
       .catch(err => console.error(err));
 
-    setCategorias(CATEGORIAS_MOCK);
+    // Categorías
+    axios.get('http://localhost:8080/api/categorias')
+      .then(res => setCategorias(res.data)) // <--- Esto llena el estado 'categorias'
+      .catch(err => console.error(err));
   }, []);
 
   // Calculamos qué productos mostrar según la página
@@ -49,10 +52,10 @@ const Home = () => {
         <div className="categories-grid">
           {categorias.map(cat => (
             <div key={cat.id} className="category-card">
-              <img src={cat.img} alt={cat.nombre} />
+              <img src={cat.imagenUrl} alt={cat.titulo} />
               <div className="category-info">
-                <h3>{cat.nombre}</h3>
-                <p>Ver {cat.nombre.toLowerCase()}</p>
+                <h3>{cat.titulo}</h3>
+                <p>Ver {cat.titulo?.toLowerCase()}</p>
               </div>
             </div>
           ))}
@@ -72,7 +75,7 @@ const Home = () => {
               </div>
               <div className="product-info">
                 <div className="info-header">
-                  <span className="category-tag">{p.categoria}</span>
+                  <span className="category-tag">{p.categoria?.titulo || "Sin categoría"}</span>
                   <span className="rating">⭐⭐⭐⭐⭐</span>
                 </div>
                 <h3>{p.nombre}</h3>

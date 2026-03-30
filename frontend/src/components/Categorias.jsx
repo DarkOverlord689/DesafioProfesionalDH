@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const Categorias = () => {
-  const cats = [
-    { id: 1, nombre: 'Hoteles', img: 'https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg' },
-    { id: 2, nombre: 'Departamentos', img: 'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg' },
-    { id: 3, nombre: 'Hostels', img: 'https://images.pexels.com/photos/1579253/pexels-photo-1579253.jpeg' },
-    { id: 4, nombre: 'Bed and Breakfast', img: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg' }
-  ];
+  const [cats, setCats] = useState([]);
+
+  useEffect(() => {
+    // Traemos las categorías reales de MySQL
+    axios.get('http://localhost:8080/api/categorias')
+      .then(res => setCats(res.data))
+      .catch(err => console.error("Error cargando categorías:", err));
+  }, []);
 
   return (
     <div className="categorias-container">
@@ -14,9 +17,10 @@ const Categorias = () => {
       <div className="categorias-grid">
         {cats.map(c => (
           <div key={c.id} className="cat-card">
-            <img src={c.img} alt={c.nombre} />
+            <img src={c.imagenUrl} alt={c.titulo} />
             <div className="cat-info">
-              <h3>{c.nombre}</h3>
+              <h3>{c.titulo}</h3>
+              <p>{c.descripcion}</p>
             </div>
           </div>
         ))}

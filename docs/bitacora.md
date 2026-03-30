@@ -43,6 +43,12 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 [x] Historia #11: Funcionalidad de eliminación de productos con confirmación (window.confirm).
 
+[x] Historia #12: Asignar Categoría.
+
+[x] Historia #17: Administrar características de producto.
+
+[x] Historia #21: Agregar Categoría.
+
 
 Estética: Diseño Premium Dark con paleta dorada (#dbb155) y gris oscuro (#272a2a).
 
@@ -57,5 +63,11 @@ Actividad: Implementación de la Vista de Detalle de Producto.
 Problemas encontrados: Error 405 (Method Not Allowed) al intentar consumir el endpoint por ID debido a conflictos de rutas en Spring Boot.
 
 Solución: Se ajustó el @GetMapping en el Backend a /api/productos/detalle/{id} y se actualizó la llamada de Axios en el Frontend. Se aplicó CSS Grid para cumplir con la maqueta de 5 imágenes.
+
+Arquitectura de UI: Implementación de un sistema de Tabs (Pestañas) en la página de Administración para organizar Productos, Categorías y Características sin sobrecargar la vista.
+
+Estado Global Local: Uso de useState para manejar el renderizado condicional de formularios y la actualización inmediata de los selectores tras crear nuevos atributos.
+
+Backend (Spring Boot): * Creación de CategoriaController y CaracteristicaController. Implementación de JpaRepository para las nuevas entidades. Habilitación de @CrossOrigin para permitir la comunicación fluida con React.
 
 Estado: Finalizado y funcional.

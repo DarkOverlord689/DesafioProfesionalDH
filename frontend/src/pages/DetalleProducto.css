@@ -127,9 +127,43 @@
         height: auto;
     }
     .fotos-secundarias {
-        display: none; /* En celular mostramos solo la principal */
+        display: none; 
     }
     .foto-principal img {
         border-radius: 10px;
     }
+}
+
+/* --- Estilos Nuevos para Características --- */
+.detalle-caracteristicas {
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+}
+
+.detalle-caracteristicas h3 {
+    color: #f3f3f3;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.caracteristicas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.caracteristica-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ddd;
+    font-size: 16px;
+}
+
+.caracteristica-item i {
+    color: #1DBEB4; /*color turquesa */
+    font-size: 20px;
+    width: 25px; /* Ancho fijo para alinear los iconos */
+    text-align: center;
 }

@@ -119,3 +119,46 @@ Pasos: Abrir las herramientas de desarrollador y activar la vista "Mobile" (iPho
 Resultado Esperado: La galería de imágenes debe apilarse correctamente y el botón de volver debe seguir siendo accesible.
 
 Estado: ✅ Pasó.
+
+12. Prueba de Gestión de Categorías (Historia #21)
+Escenario: Crear una nueva categoría desde el panel de administración y verificar su persistencia.
+
+Pasos:
+
+Ir a la pestaña "Gestionar Categorías".
+
+Rellenar el formulario con: Título: "Glamping", Descripción: "Tiendas de lujo" y una URL de imagen.
+
+Hacer clic en "Crear Categoría" y aceptar el alert.
+
+Resultado Esperado: La categoría debe guardarse en la base de datos MySQL. Al cambiar a la pestaña de "Productos", la opción "Glamping" debe aparecer automáticamente en el selector (dropdown).
+
+Estado: ✅ Pasó.
+
+13. Prueba de Asignación de Categoría (Historia #12)
+Escenario: Crear un producto vinculado a una categoría existente en la base de datos.
+
+Pasos:
+
+En la pestaña "Gestionar Productos", abrir el selector de categorías.
+
+Seleccionar una categoría real (ej: "Hoteles").
+
+Completar el resto de campos (Nombre, Descripción, Imagen) y hacer clic en "Guardar Producto".
+
+Resultado Esperado: El producto debe registrarse exitosamente. En la tabla inferior, la columna "Categoría" debe mostrar el nombre de la categoría asignada (no el ID, sino el título legible).
+
+Estado: ✅ Pasó.    
+
+14. Prueba de Interfaz por Pestañas (UX)
+Escenario: Validar que la navegación entre Productos y Categorías sea fluida.
+
+Pasos:
+
+Hacer clic en "Gestionar Productos" y luego en "Gestionar Categorías".
+
+Observar que el formulario cambie sin recargar la página.
+
+Resultado Esperado: El botón activo debe resaltar en verde (#1DB954) y el formulario anterior debe ocultarse por completo.
+
+Estado: ✅ Pasó.

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './DetalleProducto.css'; // <--- Esto es lo que une el diseño
+import './DetalleProducto.css'; // <--- Une el diseño
 
 const DetalleProducto = () => {
     const { id } = useParams();
@@ -50,10 +50,26 @@ const DetalleProducto = () => {
                 </div>
             </section>
 
-            {/* CUERPO */}
+            {/* CUERPO Y CARACTERÍSTICAS (NUEVA SECCIÓN HU #18) */}
             <section className="detalle-body">
                 <h2>Descripción del alojamiento</h2>
                 <p className="descripcion-txt">{producto.descripcion}</p>
+                
+                {/* --- ESTO ES LO NUEVO DEL SPRINT 2 --- */}
+                {producto.caracteristicas && producto.caracteristicas.length > 0 && (
+                    <div className="detalle-caracteristicas">
+                        <h3>¿Qué ofrece este lugar?</h3>
+                        <div className="caracteristicas-grid">
+                            {producto.caracteristicas.map(car => (
+                                <div key={car.id} className="caracteristica-item">
+                                    <i className={`fas ${car.icono}`} title={car.nombre}></i> 
+                                    <span>{car.nombre}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+                {/* ------------------------------------- */}
             </section>
         </div>
     );
