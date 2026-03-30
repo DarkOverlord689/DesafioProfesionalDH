@@ -47,27 +47,19 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 [x] Historia #17: Administrar características de producto.
 
+[x] Historia #18: Visualizar características al producto.
+
+[x] Historia #20: Sección de categorías y filtros.
+
 [x] Historia #21: Agregar Categoría.
 
 
 Estética: Diseño Premium Dark con paleta dorada (#dbb155) y gris oscuro (#272a2a).
 
-Componentización: Código refactorizado en la página de Administración mediante renderizado condicional por pestañas.
+Lógica de datos: Sustitución de Mocks por consumo de API Real en el Home. Implementación de lógica de filtrado por ID de categoría conservando la paginación activa.
 
-Lógica de datos: Implementación de controladores específicos para Categorías y Características en el Backend, vinculando objetos complejos (ManyToMany) mediante checkboxes en el Frontend.
+UX/UI: Diseño de tarjetas de categorías con estado "Active" (borde dorado) y barra de información que muestra el conteo de resultados dinámicos.
 
-Validaciones: Control de errores de integridad referencial (Foreign Key) para evitar el borrado de categorías o características que tengan productos activos vinculados.
-
-Actividad: Implementación de la Vista de Detalle de Producto.
-
-Problemas encontrados: Error de CORS (Access-Control-Allow-Origin) al intentar registrar nuevas características desde el puerto 5173 hacia el 8080 de Spring Boot.
-
-Solución: Se añadió la anotación @CrossOrigin(origins = "http://localhost:5173") en CategoriaController y CaracteristicaController. Se implementó un sistema de borrado manual de productos previo al borrado de categorías para mantener la integridad de la DB.
-
-Arquitectura de UI: Implementación de un sistema de Tabs (Pestañas) en la página de Administración para organizar Productos, Categorías y Características sin sobrecargar la vista.
-
-Estado Global Local: Uso de useState para manejar el renderizado condicional de formularios (tabActiva) y useEffect para la actualización inmediata de los listados tras crear o eliminar nuevos atributos.
-
-Backend (Spring Boot): * Creación de CategoriaController y CaracteristicaController. Implementación de JpaRepository para las nuevas entidades. Habilitación de @CrossOrigin para permitir la comunicación fluida con React.
+Responsividad: Uso de CSS Grid (auto-fit) para asegurar que los servicios y las categorías se reorganicen en móviles sin perder legibilidad.
 
 Estado: Finalizado y funcional.

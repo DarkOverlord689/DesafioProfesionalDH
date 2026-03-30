@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
-const CATEGORIAS_MOCK = [
-  { id: 1, nombre: 'Hoteles', img: 'https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg' },
-  { id: 2, nombre: 'Departamentos', img: 'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg' },
-  { id: 3, nombre: 'Hostels', img: 'https://images.pexels.com/photos/1579253/pexels-photo-1579253.jpeg' },
-  { id: 4, nombre: 'Bed and Breakfast', img: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg' }
-];
+import './home.css';
 
 const Home = () => {
   const [productos, setProductos] = useState([]);
   const [categorias, setCategorias] = useState([]);
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(null); // HU #20
 
-  // --- LOGICA PARA HISTORIA #8 (Paginación) ---
+  // --- Paginacion HU #8  ---
   const [paginaActual, setPaginaActual] = useState(1);
   const productosPorPagina = 10; // Criterio HU #8
 
@@ -29,10 +24,15 @@ const Home = () => {
       .catch(err => console.error(err));
   }, []);
 
-  // Calculamos qué productos mostrar según la página
+  // --- LÓGICA DE FILTRADO (HU #20) ---
+  const productosFiltrados = categoriaSeleccionada
+    ? productos.filter(p => p.categoria?.id === categoriaSeleccionada)
+    : productos;
+
+  // Ajuste de paginación sobre los productos filtrados
   const indiceUltimo = paginaActual * productosPorPagina;
   const indicePrimero = indiceUltimo - productosPorPagina;
-  const productosPaginados = productos.slice(indicePrimero, indiceUltimo);
+  const productosAMostrar = productosFiltrados.slice(indicePrimero, indiceUltimo);
 
   return (
     <div className="home-container">
@@ -51,23 +51,37 @@ const Home = () => {
         <h2>Buscar por tipo de alojamiento</h2>
         <div className="categories-grid">
           {categorias.map(cat => (
-            <div key={cat.id} className="category-card">
+            <div
+              key={cat.id}
+              className={`category-card ${categoriaSeleccionada === cat.id ? 'active-filter' : ''}`}
+              onClick={() => {
+                setCategoriaSeleccionada(cat.id === categoriaSeleccionada ? null : cat.id);
+                setPaginaActual(1); // Reset de página al filtrar
+              }}
+            >
               <img src={cat.imagenUrl} alt={cat.titulo} />
               <div className="category-info">
                 <h3>{cat.titulo}</h3>
-                <p>Ver {cat.titulo?.toLowerCase()}</p>
+                <p>{categoriaSeleccionada === cat.id ? 'Quitar filtro' : `Ver ${cat.titulo?.toLowerCase()}`}</p>
               </div>
             </div>
           ))}
         </div>
       </section>
 
+      {/* INFO DE RESULTADOS (Criterio HU #20) */}
+      <div className="results-info-bar">
+        <p>Mostrando <b>{productosFiltrados.length}</b> de <b>{productos.length}</b> alojamientos disponibles</p>
+        {categoriaSeleccionada && (
+          <button className="btn-clear" onClick={() => setCategoriaSeleccionada(null)}>Limpiar filtros ✕</button>
+        )}
+      </div>
+
       {/* HU #4: Grid 2x5 */}
       <section className="recommendations-block">
         <h2>Recomendaciones</h2>
         <div className="product-grid">
-          {/* IMPORTANTE:  productosPaginados en vez de productos */}
-          {productosPaginados.map(p => (
+          {productosAMostrar.map(p => (
             <div key={p.id} className="product-card">
               <div className="img-container">
                 <img src={p.imagenUrl} alt={p.nombre} />
@@ -75,41 +89,26 @@ const Home = () => {
               </div>
               <div className="product-info">
                 <div className="info-header">
-                  <span className="category-tag">{p.categoria?.titulo || "Sin categoría"}</span>
+                  <span className="category-tag">{p.categoria?.titulo || "Alojamiento"}</span>
                   <span className="rating">⭐⭐⭐⭐⭐</span>
                 </div>
                 <h3>{p.nombre}</h3>
                 <p className="description">{p.descripcion}</p>
-                <Link to={`/producto/${p.id}`} className="btn-detail">
-                  Ver detalle
-                </Link>
+                <Link to={`/producto/${p.id}`} className="btn-detail">Ver detalle</Link>
               </div>
             </div>
           ))}
         </div>
 
         {/* --- CONTROLES DE PAGINACIÓN (HU #8) --- */}
-        <div className="pagination-controls">
-          <button
-            onClick={() => setPaginaActual(1)}
-            disabled={paginaActual === 1}
-            className="btn-pag"
-          > Inicio </button>
-
-          <button
-            onClick={() => setPaginaActual(prev => prev - 1)}
-            disabled={paginaActual === 1}
-            className="btn-pag"
-          > Anterior </button>
-
-          <span className="page-number">Página {paginaActual}</span>
-
-          <button
-            onClick={() => setPaginaActual(prev => prev + 1)}
-            disabled={indiceUltimo >= productos.length}
-            className="btn-pag"
-          > Siguiente </button>
-        </div>
+        {productosFiltrados.length > productosPorPagina && (
+          <div className="pagination-controls">
+            <button onClick={() => setPaginaActual(1)} disabled={paginaActual === 1} className="btn-pag">Inicio</button>
+            <button onClick={() => setPaginaActual(prev => prev - 1)} disabled={paginaActual === 1} className="btn-pag">Anterior</button>
+            <span className="page-number">Página {paginaActual}</span>
+            <button onClick={() => setPaginaActual(prev => prev + 1)} disabled={indiceUltimo >= productosFiltrados.length} className="btn-pag">Siguiente</button>
+          </div>
+        )}
       </section>
     </div>
   );

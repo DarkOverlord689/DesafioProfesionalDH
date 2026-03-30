@@ -196,3 +196,35 @@ Cambiar a la pestaña "Gestionar Productos".
 Desplegar el selector de categorías.
 Resultado Esperado: "Departamentos" debe figurar en el listado para ser asignado a cualquier nuevo producto.
 Estado: ✅ Pasó.
+
+18. Prueba de Visualización de Características (Historia #18) Escenario: El usuario ingresa al detalle de un producto para conocer sus servicios adicionales.
+
+Pasos: Desde el Home, hacer clic en "Ver detalle" de un producto que tenga características asignadas (ej: WiFi, Aire Acondicionado).
+
+Desplazarse hasta el nuevo bloque titulado "Características".
+
+Verificar que cada elemento muestre su nombre y el icono de FontAwesome correspondiente.
+
+Redimensionar la ventana del navegador para validar la adaptabilidad.
+
+Resultado Esperado: Se visualiza un grid responsivo con iconos dorados (#dbb155). El diseño se ajusta de 4 a 1 columna en dispositivos móviles sin perder legibilidad.
+
+Estado: ✅ Pasó.
+
+19. Prueba de Filtrado por Categoría (Historia #20) Escenario: El usuario desea ver únicamente "Hoteles" en la lista de recomendaciones.
+
+Pasos: En la sección superior del Home, hacer clic en la tarjeta de la categoría "Hoteles".
+
+Observar el cambio en la lista de productos y en la barra de información.
+
+Hacer clic en "Limpiar Filtros" o seleccionar otra categoría.
+
+Resultado Esperado: - La tarjeta seleccionada resalta con un borde dorado.
+
+La lista de productos se actualiza mostrando solo los que pertenecen a esa categoría.
+
+El contador indica correctamente: "Mostrando X de Y productos totales".
+
+Al limpiar el filtro, la lista vuelve a su estado original (10 productos por paginación).
+
+Estado: ✅ Pasó.
