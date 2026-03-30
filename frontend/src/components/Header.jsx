@@ -36,9 +36,6 @@ const Header = () => {
         ) : (
           /* ESCENARIO: USUARIO ANÓNIMO */
           <>
-            <Link to="/administracion">
-              <button className="btn-secondary">Panel Admin</button>
-            </Link>
             <Link to="/registro">
               <button className="btn-secondary">Crear cuenta</button>
             </Link>

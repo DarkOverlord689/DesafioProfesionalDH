@@ -7,6 +7,7 @@ import Administracion from './pages/Administracion';
 import DetalleProducto from './pages/DetalleProducto';
 import Registro from './pages/Registro';
 import Login from "./login/Login";
+import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 
 function App() {
@@ -19,8 +20,14 @@ function App() {
           {/* AUTHS */}
           <Route path="/registro" element={<Registro />} />
           <Route path="/login" element={<Login />} />
-          {/* path producto y admin */}
-          <Route path="/administracion" element={<Administracion />} />
+          <Route
+            path="/administracion"
+            element={
+              <ProtectedRoute>
+                <Administracion />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/producto/:id" element={<DetalleProducto />} />
         </Routes>
       </main>
