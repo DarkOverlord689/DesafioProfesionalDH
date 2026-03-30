@@ -3,6 +3,9 @@ package com.digitalhouse.backend.controllers;
 import com.digitalhouse.backend.models.Usuario;
 import com.digitalhouse.backend.services.UsuarioService;
 import com.digitalhouse.backend.dto.LoginRequest;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,4 +41,19 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
     }
+
+    @PutMapping("/{id}/rol")
+    public ResponseEntity<?> cambiarRol(@PathVariable Long id, @RequestBody String nuevoRol) {
+        // Lógica para buscar usuario y setearle el nuevo rol (sin comillas si viene
+        // como texto plano)
+        usuarioService.actualizarRol(id, nuevoRol.replace("\"", ""));
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Usuario>> listarTodos() {
+        return ResponseEntity.ok(usuarioService.listarTodos());
+    }
+
+    
 }

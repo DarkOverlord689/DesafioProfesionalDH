@@ -255,3 +255,58 @@ Resultado Esperado: * Llega un correo con el asunto "Bienvenido a Darksishop".
 El cuerpo del mensaje incluye el nombre del usuario registrado.
 
 Estado: ✅ PASÓ.
+
+22. Prueba de Visualización de Usuarios (Historia #14)
+Escenario: El Administrador consulta la lista completa de usuarios registrados.
+
+Pasos:
+
+Iniciar sesión con cuenta de ADMIN.
+
+Ir al panel de /administracion.
+
+Hacer clic en la pestaña "Gestionar Usuarios".
+
+Resultado Esperado:
+
+Frontend: Se despliega una tabla con ID, Nombre, Email y Rol de todos los usuarios.
+
+API: El endpoint /api/usuarios responde un Status 200 con el JSON de la lista.
+
+Estado: ✅ PASÓ.
+
+23. Prueba de Cambio de Rol / Permisos (Historia #15)
+Escenario: El Administrador otorga permisos de nivel superior a un usuario estándar.
+
+Pasos:
+
+Ubicar un usuario con rol "USER" en la tabla.
+
+Hacer clic en el botón "Hacer Admin".
+
+Confirmar la acción en el alert.
+
+Resultado Esperado:
+
+Base de Datos: El campo rol del usuario cambia de "USER" a "ADMIN" instantáneamente.
+
+Interfaz: El botón del usuario cambia de color o desaparece para indicar que ya es Admin.
+
+Estado: ✅ PASÓ.
+
+24. Prueba de Protección de Rutas (Historia #16)
+Escenario: Un usuario sin permisos intenta acceder a la consola de administración.
+
+Pasos:
+
+Iniciar sesión como usuario común ("USER") o cerrar sesión.
+
+Intentar escribir manualmente en el navegador: localhost:5173/administracion.
+
+Resultado Esperado:
+
+Frontend: El sistema detecta la falta de permisos y redirige automáticamente al Home (/).
+
+Seguridad: No se permite visualizar ningún componente del panel administrativo.
+
+Estado: ✅ PASÓ.

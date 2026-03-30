@@ -1,0 +1,16 @@
+.gestion-container { padding: 20px; background: #121212; border-radius: 8px; }
+.gestion-title { color: #d4af37; margin-bottom: 20px; text-align: center; }
+
+.gestion-table { width: 100%; border-collapse: collapse; color: white; }
+.gestion-table th { background: #222; color: #d4af37; padding: 12px; border-bottom: 2px solid #333; }
+.gestion-table td { padding: 12px; border-bottom: 1px solid #333; text-align: center; }
+
+.badge { padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
+.badge.admin { background-color: #d4af37; color: black; }
+.badge.user { background-color: #444; color: white; }
+
+.btn-toggle { padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+.btn-add { background: #d4af37; color: black; }
+.btn-add:hover { background: #b8962e; }
+.btn-remove { background: #ff4d4d; color: white; }
+.btn-remove:hover { background: #cc0000; }

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './Administracion.css';
+import GestionUsuarios from '../components/GestionUsuarios';
 
 const Administracion = () => {
   const [productos, setProductos] = useState([]);
@@ -128,13 +130,13 @@ const Administracion = () => {
     }
   };
 
-return (
+  return (
     <div className="admin-container">
       <h1 className="admin-title">Panel de Administración</h1>
 
       {/* 1. NAVEGACIÓN (TABS) */}
       <div className="admin-tabs">
-        {['productos', 'categorias', 'caracteristicas'].map((tab) => (
+        {['productos', 'categorias', 'caracteristicas', 'usuarios'].map((tab) => (
           <button
             key={tab}
             type="button"
@@ -148,7 +150,7 @@ return (
 
       {/* 2. FORMULARIOS DINÁMICOS Y LISTAS DE BORRADO */}
       <div className="admin-forms-wrapper">
-        
+
         {/* PESTAÑA PRODUCTOS */}
         {tabActiva === 'productos' && (
           <form className="admin-form" onSubmit={handleCrear}>
@@ -217,26 +219,34 @@ return (
         )}
       </div>
 
-      {/* 3. TABLA DE PRODUCTOS */}
-      {tabActiva === 'productos' && (
-        <div className="admin-table-section">
-          <h2 className="table-title">Productos en Inventario</h2>
-          <table className="admin-table">
-            <thead>
-              <tr><th>ID</th><th>Nombre</th><th>Categoría</th><th>Acciones</th></tr>
-            </thead>
-            <tbody>
-              {productos.map(p => (
-                <tr key={p.id}>
-                  <td>{p.id}</td><td>{p.nombre}</td><td>{p.categoria?.titulo || "---"}</td>
-                  <td><button className="btn-delete" onClick={() => handleEliminar(p.id)}>Eliminar</button></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      {tabActiva === 'usuarios' && (
+        <div className="admin-tab-content">
+          <GestionUsuarios />
         </div>
       )}
-    </div>
+
+      {/* 3. TABLA DE PRODUCTOS */}
+      {
+        tabActiva === 'productos' && (
+          <div className="admin-table-section">
+            <h2 className="table-title">Productos en Inventario</h2>
+            <table className="admin-table">
+              <thead>
+                <tr><th>ID</th><th>Nombre</th><th>Categoría</th><th>Acciones</th></tr>
+              </thead>
+              <tbody>
+                {productos.map(p => (
+                  <tr key={p.id}>
+                    <td>{p.id}</td><td>{p.nombre}</td><td>{p.categoria?.titulo || "---"}</td>
+                    <td><button className="btn-delete" onClick={() => handleEliminar(p.id)}>Eliminar</button></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )
+      }
+    </div >
   );
 };
 

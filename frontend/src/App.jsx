@@ -8,6 +8,7 @@ import DetalleProducto from './pages/DetalleProducto';
 import Registro from './pages/Registro';
 import Login from "./login/Login";
 import ProtectedRoute from './components/ProtectedRoute';
+import GestionUsuarios from './components/GestionUsuarios';
 import './App.css';
 
 function App() {
@@ -25,6 +26,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Administracion />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/administracion/usuarios"
+            element={
+              <ProtectedRoute>
+                <GestionUsuarios />
               </ProtectedRoute>
             }
           />

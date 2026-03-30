@@ -47,6 +47,12 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 [x] Historia #13: Registro.
 
+[x] Historia #14: Login.
+
+[x] Historia #15: Logout.
+
+[x] Historia #16: Identificar administrador y conceder permisos.
+
 [x] Historia #17: Administrar características de producto.
 
 [x] Historia #18: Visualizar características al producto.
@@ -57,13 +63,3 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 [x] Historia #21: Agregar Categoría.
 
-
-Backend: Creado UsuarioController, UsuarioService y UsuarioRepository.
-
-Seguridad: Implementada encriptación de contraseñas con BCrypt.
-
-Notificaciones: Configuración de SMTP con Mailtrap para correos de bienvenida automáticos.
-
-Frontend: Creado componente Registro.jsx con validaciones y estilos CSS personalizados.
-
-UX: Implementada navegación con react-router-dom y redirección automática tras éxito.

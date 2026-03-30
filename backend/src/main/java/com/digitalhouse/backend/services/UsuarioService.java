@@ -3,6 +3,9 @@ package com.digitalhouse.backend.services;
 import com.digitalhouse.backend.dto.LoginRequest;
 import com.digitalhouse.backend.models.Usuario;
 import com.digitalhouse.backend.repositories.UsuarioRepository;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -68,5 +71,17 @@ public class UsuarioService {
         } else {
             throw new RuntimeException("Contraseña incorrecta");
         }
+    }
+
+    public void cambiarPermisos(Long id, String nuevoRol) {
+        usuarioRepository.actualizarRol(id, nuevoRol);
+    }
+
+    public void actualizarRol(Long id, String nuevoRol) {
+        usuarioRepository.actualizarRol(id, nuevoRol);
+    }
+
+    public List<Usuario> listarTodos() {
+        return usuarioRepository.findAll();
     }
 }
