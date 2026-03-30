@@ -228,3 +228,30 @@ El contador indica correctamente: "Mostrando X de Y productos totales".
 Al limpiar el filtro, la lista vuelve a su estado original (10 productos por paginación).
 
 Estado: ✅ Pasó.
+
+20. Prueba de Registro y Seguridad (Historia #13)
+Escenario: El usuario crea una cuenta nueva desde el Frontend.
+
+Pasos: Ir a /registro.
+Completar: Nombre, Apellido, Email y Password.
+Click en "Registrarse".
+
+Resultado Esperado: * Frontend: Muestra mensaje de éxito y redirige al Home en 3s.
+
+Base de Datos: El registro aparece en la tabla usuarios.
+
+Seguridad: La columna password muestra un hash de BCrypt (ej: $2a$10...), nunca el texto plano.
+
+Estado: ✅ PASÓ.
+
+21. Prueba de Notificación Automática (Historia #19)
+Escenario: El sistema envía un correo de bienvenida tras el registro.
+
+Pasos: Realizar un registro exitoso.
+Abrir el Inbox de Mailtrap.
+
+Resultado Esperado: * Llega un correo con el asunto "Bienvenido a Darksishop".
+
+El cuerpo del mensaje incluye el nombre del usuario registrado.
+
+Estado: ✅ PASÓ.

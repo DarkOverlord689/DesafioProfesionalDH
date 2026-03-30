@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Administracion from './pages/Administracion';
 import DetalleProducto from './pages/DetalleProducto';
+import Registro from './pages/Registro';
 import './App.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <main style={{ minHeight: '80vh' }}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/registro" element={<Registro />} />
           <Route path="/administracion" element={<Administracion />} />
           <Route path="/producto/:id" element={<DetalleProducto />} />
         </Routes>

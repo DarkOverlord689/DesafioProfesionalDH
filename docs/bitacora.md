@@ -45,21 +45,25 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 [x] Historia #12: Asignar Categoría.
 
+[x] Historia #13: Registro.
+
 [x] Historia #17: Administrar características de producto.
 
 [x] Historia #18: Visualizar características al producto.
+
+[x] Historia #19: Email
 
 [x] Historia #20: Sección de categorías y filtros.
 
 [x] Historia #21: Agregar Categoría.
 
 
-Estética: Diseño Premium Dark con paleta dorada (#dbb155) y gris oscuro (#272a2a).
+Backend: Creado UsuarioController, UsuarioService y UsuarioRepository.
 
-Lógica de datos: Sustitución de Mocks por consumo de API Real en el Home. Implementación de lógica de filtrado por ID de categoría conservando la paginación activa.
+Seguridad: Implementada encriptación de contraseñas con BCrypt.
 
-UX/UI: Diseño de tarjetas de categorías con estado "Active" (borde dorado) y barra de información que muestra el conteo de resultados dinámicos.
+Notificaciones: Configuración de SMTP con Mailtrap para correos de bienvenida automáticos.
 
-Responsividad: Uso de CSS Grid (auto-fit) para asegurar que los servicios y las categorías se reorganicen en móviles sin perder legibilidad.
+Frontend: Creado componente Registro.jsx con validaciones y estilos CSS personalizados.
 
-Estado: Finalizado y funcional.
+UX: Implementada navegación con react-router-dom y redirección automática tras éxito.
