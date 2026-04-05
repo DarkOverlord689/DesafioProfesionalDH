@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import './buscador.css';
+import es from 'date-fns/locale/es';
 import './home.css';
+
+registerLocale('es', es);
 
 const Home = () => {
   const [productos, setProductos] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(null); // HU #20
+
+  // --- HU #22 ---
+  const [busquedaTexto, setBusquedaTexto] = useState("");
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [filtrosAplicados, setFiltrosAplicados] = useState({ texto: "", fechas: [null, null] });
 
   // --- Paginacion HU #8  ---
   const [paginaActual, setPaginaActual] = useState(1);
@@ -24,10 +36,25 @@ const Home = () => {
       .catch(err => console.error(err));
   }, []);
 
-  // --- LÓGICA DE FILTRADO (HU #20) ---
-  const productosFiltrados = categoriaSeleccionada
-    ? productos.filter(p => p.categoria?.id === categoriaSeleccionada)
-    : productos;
+  // --- LÓGICA DE FILTRADO UNIFICADA (HU #20 + HU #22) ---
+  const productosFiltrados = productos.filter(p => {
+    // 1. Filtro por Categoría (HU #20)
+    const cumpleCategoria = categoriaSeleccionada ? p.categoria?.id === categoriaSeleccionada : true;
+
+    // 2. Filtro por Texto (HU #22)
+    const nombre = p.nombre ? p.nombre.toLowerCase() : "";
+    const descripcion = p.descripcion ? p.descripcion.toLowerCase() : "";
+    const cumpleTexto = nombre.includes(filtrosAplicados.texto.toLowerCase()) ||
+      descripcion.includes(filtrosAplicados.texto.toLowerCase());
+
+    return cumpleCategoria && cumpleTexto;
+  });
+
+  // Función que se activa al dar click al botón "Buscar"
+  const ejecutarBusqueda = () => {
+    setFiltrosAplicados({ texto: busquedaTexto });
+    setPaginaActual(1);
+  };
 
   // Ajuste de paginación sobre los productos filtrados
   const indiceUltimo = paginaActual * productosPorPagina;
@@ -36,17 +63,51 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* Buscador */}
+      
+      {/* SECCIÓN BUSCADOR (HU #22) */}
       <section className="search-block">
         <h1>Busca ofertas en hoteles, casas y mucho más</h1>
+        <p>Encuentra el alojamiento ideal para tus fechas y destino</p>
+        
         <div className="search-bar">
-          <input type="text" placeholder="¿A dónde vamos?" className="input-search" />
-          <input type="text" placeholder="Check in - Check out" className="input-search" />
-          <button className="btn-primary">Buscar</button>
+          <div className="search-input-wrapper">
+            <input 
+              type="text" 
+              placeholder="¿A dónde vamos?" 
+              className="input-search" 
+              value={busquedaTexto}
+              onChange={(e) => setBusquedaTexto(e.target.value)}
+              list="productos-sugeridos" 
+            />
+            <datalist id="productos-sugeridos">
+              {productos.map(p => <option key={p.id} value={p.nombre} />)}
+            </datalist>
+          </div>
+
+          <div className="datepicker-wrapper">
+            <DatePicker
+              selectsRange={true}
+              startDate={startDate}
+              endDate={endDate}
+              onChange={(update) => {
+                const [start, end] = update;
+                setStartDate(start);
+                setEndDate(end);
+              }}
+              isClearable={true}
+              placeholderText="Check in - Check out"
+              className="input-search"
+              locale="es"
+              minDate={new Date()}
+              dateFormat="dd/MM/yyyy"
+            />
+          </div>
+
+          <button className="btn-primary" onClick={ejecutarBusqueda}>Buscar</button>
         </div>
       </section>
 
-      {/* Categorías */}
+      {/* SECCIÓN CATEGORÍAS (HU #20) */}
       <section className="categories-block">
         <h2>Buscar por tipo de alojamiento</h2>
         <div className="categories-grid">
@@ -56,7 +117,7 @@ const Home = () => {
               className={`category-card ${categoriaSeleccionada === cat.id ? 'active-filter' : ''}`}
               onClick={() => {
                 setCategoriaSeleccionada(cat.id === categoriaSeleccionada ? null : cat.id);
-                setPaginaActual(1); // Reset de página al filtrar
+                setPaginaActual(1);
               }}
             >
               <img src={cat.imagenUrl} alt={cat.titulo} />
@@ -69,15 +130,21 @@ const Home = () => {
         </div>
       </section>
 
-      {/* INFO DE RESULTADOS (Criterio HU #20) */}
+      {/* BARRA DE INFO RESULTADOS */}
       <div className="results-info-bar">
-        <p>Mostrando <b>{productosFiltrados.length}</b> de <b>{productos.length}</b> alojamientos disponibles</p>
-        {categoriaSeleccionada && (
-          <button className="btn-clear" onClick={() => setCategoriaSeleccionada(null)}>Limpiar filtros ✕</button>
+        <p>Mostrando <b>{productosFiltrados.length}</b> de <b>{productos.length}</b> alojamientos</p>
+        {(categoriaSeleccionada || filtrosAplicados.texto) && (
+          <button className="btn-clear" onClick={() => {
+            setCategoriaSeleccionada(null);
+            setBusquedaTexto("");
+            setFiltrosAplicados({ texto: "" });
+            setStartDate(null);
+            setEndDate(null);
+          }}>Limpiar filtros ✕</button>
         )}
       </div>
 
-      {/* HU #4: Grid 2x5 */}
+      {/* RECOMENDACIONES (GRID) */}
       <section className="recommendations-block">
         <h2>Recomendaciones</h2>
         <div className="product-grid">
@@ -100,7 +167,7 @@ const Home = () => {
           ))}
         </div>
 
-        {/* --- CONTROLES DE PAGINACIÓN (HU #8) --- */}
+        {/* PAGINACIÓN */}
         {productosFiltrados.length > productosPorPagina && (
           <div className="pagination-controls">
             <button onClick={() => setPaginaActual(1)} disabled={paginaActual === 1} className="btn-pag">Inicio</button>

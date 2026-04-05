@@ -310,3 +310,19 @@ Frontend: El sistema detecta la falta de permisos y redirige automáticamente al
 Seguridad: No se permite visualizar ningún componente del panel administrativo.
 
 Estado: ✅ PASÓ.
+
+25. Prueba de Búsqueda y Selección de Fechas (Historia #22)
+
+Escenario: El usuario filtra productos por nombre y fechas.
+
+Pasos: 
+
+Escribir en el buscador (verificar que salgan sugerencias).
+
+Seleccionar un rango en el calendario doble.
+
+Clic en "Buscar".
+
+Resultado Esperado: La lista de recomendaciones se actualiza mostrando solo los productos que coinciden con el texto. El calendario retiene el rango seleccionado.
+
+Estado: ✅ PASÓ.
