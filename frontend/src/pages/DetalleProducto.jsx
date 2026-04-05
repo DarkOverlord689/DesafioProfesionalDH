@@ -4,12 +4,14 @@ import axios from 'axios';
 import Politicas from '../components/Politicas';
 import Disponibilidad from '../components/Disponibilidad';
 import './DetalleProducto.css';
+import CompartirModal from '../components/CompartirModal';
 
 const DetalleProducto = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [producto, setProducto] = useState(null);
     const [error, setError] = useState(false);
+    const [showShare, setShowShare] = useState(false);
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/productos/detalle/${id}`)
@@ -25,10 +27,17 @@ const DetalleProducto = () => {
 
     return (
         <div className="detalle-container">
-            {/* ENCABEZADO */}
+            {/* ENCABEZADO ACTUALIZADO HU #27 */}
             <header className="detalle-header">
                 <div className="header-info">
-                    <p className="categoria-txt">{producto.categoria?.nombre || "Alojamiento"}</p>
+                    <div className="categoria-share-row">
+                        <p className="categoria-txt">{producto.categoria?.nombre || "Alojamiento"}</p>
+
+                        {/* Botón Compartir HU #27 */}
+                        <button className="btn-share-trigger" onClick={() => setShowShare(true)}>
+                            <i className="fas fa-share-alt"></i> Compartir
+                        </button>
+                    </div>
                     <h1>{producto.nombre}</h1>
                 </div>
                 <button className="btn-volver" onClick={() => navigate(-1)}>
@@ -78,6 +87,13 @@ const DetalleProducto = () => {
             <Disponibilidad fechasReservadas={[new Date(2024, 10, 20), new Date(2024, 10, 21)]} />
             {/* --- POLÍTICAS (HU #26) --- */}
             <Politicas />
+            {/* MODAL DE COMPARTIR HU #27 */}
+            {showShare && (
+                <CompartirModal
+                    producto={producto}
+                    onClose={() => setShowShare(false)}
+                />
+            )}
         </div>
     );
 };

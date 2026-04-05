@@ -73,10 +73,12 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 [x] Historia #26: Visualización políticas del producto.
 
-Arquitectura: Creación de la página Favoritos.jsx con lógica de filtrado dinámico basada en la API de productos y el almacenamiento local.
+[x] Historia #27: Compartir producto en redes.
 
-Integración: Actualización del App.jsx para incluir la ruta protegida /favoritos y del Header.jsx para proporcionar un acceso directo e intuitivo.
+Arquitectura de Componentes: Creación de CompartirModal.jsx, un componente desacoplado que recibe el objeto producto para generar una vista previa dinámica.
 
-Funcionalidad: Implementación de eliminación reactiva; al quitar un producto de la lista, la UI se actualiza instantáneamente sin recargar la página.
+Lógica de Integración: Uso de window.location.href para obtener la URL dinámica del producto y encodeURIComponent para asegurar que los mensajes personalizados y enlaces se procesen correctamente en las APIs de las redes sociales.
 
-UX/UI: Diseño responsivo que mantiene la consistencia visual del "Dark Mode" y el sistema de grillas utilizado en el Home.
+Funcionalidades Extra: Implementación de la API navigator.clipboard para permitir el copiado rápido del enlace al portapapeles.
+
+UI/UX: Diseño de ventana emergente (Modal) con overlay para mantener el enfoque, incluyendo campos de texto editables para la personalización del mensaje.

@@ -227,3 +227,29 @@
         grid-template-columns: 1fr; /*móviles */
     }
 }
+
+.categoria-share-row {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espacio entre el texto de categoría y el botón */
+}
+
+.btn-share-trigger {
+    background: none;
+    border: 1px solid #f1c40f; /* Dorado para que combine */
+    color: #f1c40f;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.btn-share-trigger:hover {
+    background: #f1c40f;
+    color: #1a1a1a;
+}
+
+.btn-share-trigger i {
+    margin-right: 5px;
+}

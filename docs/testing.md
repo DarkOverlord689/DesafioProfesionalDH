@@ -426,3 +426,33 @@ Pasos: Eliminar todos los favoritos y entrar a la sección.
 Resultado Esperado: Se muestra un mensaje amigable indicando que no hay favoritos y un botón para volver a explorar.
 
 Estado: ✅ PASÓ.
+
+36. Prueba de Activación del Modal (Historia #27)
+
+Escenario: El usuario desea compartir un hotel específico.
+
+Pasos: Hacer clic en el botón "Compartir" ubicado en el encabezado del detalle.
+
+Resultado Esperado: Se despliega el modal con la imagen, nombre y descripción correcta del producto actual.
+
+Estado: ✅ PASÓ.
+
+37. Prueba de Mensaje Personalizado (Historia #27)
+
+Escenario: El usuario quiere añadir un comentario antes de tuitear.
+
+Pasos: 1. Escribir en el textarea: "¡Miren este lugar para las vacaciones!". 2. Clic en el icono de Twitter.
+
+Resultado Esperado: La ventana de Twitter se abre con el texto exacto ingresado por el usuario más el enlace al producto.
+
+Estado: ✅ PASÓ.
+
+38. Prueba de Copiado de Enlace (Historia #27)
+
+Escenario: El usuario prefiere enviar el link por correo o mensaje privado manual.
+
+Pasos: Hacer clic en el botón "Copiar Enlace".
+
+Resultado Esperado: Se muestra un aviso de confirmación ("¡Enlace copiado!") y al pegar (Ctrl+V) en cualquier lugar, aparece la URL del detalle del producto.
+
+Estado: ✅ PASÓ.
