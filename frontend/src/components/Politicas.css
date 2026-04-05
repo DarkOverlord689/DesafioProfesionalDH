@@ -1,0 +1,55 @@
+.politicas-seccion {
+    width: 100%;
+    /* Criterio de aceptación */
+    padding: 30px 50px;
+    border-top: 1px solid #dfe4ea;
+    margin-top: 20px;
+}
+
+.politicas-header h2 {
+    color: #383B58;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.subrayado-politicas {
+    border: 0;
+    height: 2px;
+    background-color: #1DB954;
+    /* El verde que usas en el buscador */
+    width: 100%;
+    /* Subrayado que destaca importancia */
+    margin-bottom: 25px;
+}
+
+.politicas-contenedor {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    /* Para que sea responsive */
+}
+
+.columna-politica {
+    flex: 1;
+    min-width: 250px;
+}
+
+.columna-politica h3 {
+    color: #383B58;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.columna-politica ul {
+    list-style: none;
+    padding: 0;
+    color: #666;
+}
+
+.columna-politica li,
+.columna-politica p {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}

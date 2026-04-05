@@ -65,10 +65,10 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 [x] Historia #22: Realizar busqueda.
 
-Frontend: Integración de la librería react-datepicker para la selección de rangos de fechas (Check-in / Check-out).
+[x] Historia #26: Visualización políticas del producto.
 
-Lógica: Implementación de filtro combinado en Home.jsx que cruza los datos de búsqueda por texto con la lista de productos.
+Frontend: Creación del componente Politicas.jsx para centralizar la información legal y de seguridad del producto.
 
-UX/UI: Añadido sistema de sugerencias (autocompletado) mediante datalist vinculado al input de búsqueda.
+Diseño: Aplicación de estilos CSS para cumplir con la distribución en tres columnas (Normas, Salud, Cancelación).
 
-Diseño: Estructuración del bloque buscador con título, párrafo descriptivo y botón de acción, manteniendo la visibilidad de categorías y recomendaciones.
+UX/UI: Implementación del título principal con subrayado destacado y contenedor al 100% del ancho de la página de detalle.

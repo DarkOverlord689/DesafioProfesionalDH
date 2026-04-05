@@ -326,3 +326,19 @@ Clic en "Buscar".
 Resultado Esperado: La lista de recomendaciones se actualiza mostrando solo los productos que coinciden con el texto. El calendario retiene el rango seleccionado.
 
 Estado: ✅ PASÓ.
+
+26. Prueba de Visualización de Políticas (Historia #26)
+
+Escenario: El usuario entra al detalle de un producto para conocer las reglas.
+
+Pasos: 
+Ir al Home y hacer clic en "Ver detalle" de cualquier producto.
+Desplazarse hasta el final de la página.
+
+Resultado Esperado: * Se visualiza el bloque "Qué tenés que saber" con el título subrayado.
+
+La información está organizada en 3 columnas claras.
+
+El bloque ocupa todo el ancho de la pantalla (100% container).
+
+Estado: ✅ PASÓ.

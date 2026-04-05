@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './DetalleProducto.css'; // <--- Une el diseño
+import Politicas from '../components/Politicas';
+import './DetalleProducto.css';
 
 const DetalleProducto = () => {
     const { id } = useParams();
@@ -58,11 +59,8 @@ const DetalleProducto = () => {
                 {/* --- SPRINT 2 --- */}
                 {producto.caracteristicas && producto.caracteristicas.length > 0 && (
                     <div className="detalle-caracteristicas-bloque">
-                        {/* ➔ Criterio: Título “Características” */}
                         <h2 className="titulo-caracteristicas">Características</h2>
                         <hr className="separador-dorado" />
-
-                        {/* ➔ Criterio: Listar con iconos y responsividad */}
                         <div className="caracteristicas-grid-final">
                             {producto.caracteristicas.map(car => (
                                 <div key={car.id} className="caracteristica-item-card">
@@ -75,6 +73,8 @@ const DetalleProducto = () => {
                 )}
                 {/* ------------------------------------- */}
             </section>
+            {/* --- POLÍTICAS (HU #26) --- */}
+            <Politicas />
         </div>
     );
 };
