@@ -67,12 +67,14 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 [x] Historia #23: Visualizar disponibilidad.
 
+[x] Historia #24: Marcar como favorito.
+
 [x] Historia #26: Visualización políticas del producto.
 
-Componentes: Creación de Disponibilidad.jsx con modo inline para mostrar el calendario siempre abierto.
+Lógica: Integración de AuthContext para restringir la acción a usuarios logueados.
 
-Lógica: Implementación de la propiedad excludeDates para bloquear visualmente los días no disponibles.
+Persistencia: Uso de localStorage para que los favoritos no se borren al recargar la página.
 
-UX/UI: Diseño adaptado al modo oscuro del sitio, eliminando fondos genéricos para una integración orgánica.
+Interfaz: Creación de un botón interactivo (Toggle) con cambio de estado visual (🤍 / ❤️) y posicionamiento absoluto sobre la imagen del producto.
 
-Resiliencia: Añadido de bloque de control de errores con opción de reintento para la carga de datos de disponibilidad.
+UX: Implementación de alertas de prevención para usuarios no autenticados.

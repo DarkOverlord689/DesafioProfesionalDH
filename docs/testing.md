@@ -372,3 +372,27 @@ Pasos: Forzar el estado de error en el componente.
 Resultado Esperado: Aparece un mensaje claro y un botón de "Intentar nuevamente".
 
 Estado: ✅ PASÓ.
+
+30. Prueba de Restricción de Acceso (Historia #24)(Historia #24)
+
+Pasos: Intentar marcar un favorito sin haber iniciado sesión.
+
+Resultado Esperado: El sistema lanza una alerta y no permite el cambio de estado del icono.
+
+Estado: ✅ PASÓ.
+
+31. Prueba de Persistencia de Favoritos (Historia #24)
+
+Pasos: Iniciar sesión, marcar 3 productos como favoritos y refrescar el navegador (F5).
+
+Resultado Esperado: Los 3 productos mantienen el corazón rojo tras la recarga.
+
+Estado: ✅ PASÓ.
+
+32. Prueba de Desmarcado (Toggle) (Historia #24)
+
+Pasos: Hacer clic en un producto ya marcado como favorito.
+
+Resultado Esperado: El icono vuelve a su estado inicial (🤍) y se elimina del almacenamiento local.
+
+Estado: ✅ PASÓ.

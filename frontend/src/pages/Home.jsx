@@ -5,6 +5,7 @@ import DatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './buscador.css';
 import es from 'date-fns/locale/es';
+import { useAuth } from '../context/AuthContext';
 import './home.css';
 
 registerLocale('es', es);
@@ -23,6 +24,32 @@ const Home = () => {
   // --- Paginacion HU #8  ---
   const [paginaActual, setPaginaActual] = useState(1);
   const productosPorPagina = 10; // Criterio HU #8
+  
+  // --- HU #24: Favoritos ---
+  const [favoritos, setFavoritos] = useState(() => {
+    const saved = localStorage.getItem("favoritos");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  // 2. Función de toggle PROTEGIDA
+  const toggleFavorito = (productoId) => {
+    // CRITERIO: "Como usuario autenticado..."
+    if (!user) {
+      alert("Debes iniciar sesión para guardar favoritos ❤️");
+      // Opcional: navigate('/login');
+      return;
+    }
+
+    setFavoritos((prev) => {
+      const esFavorito = prev.includes(productoId);
+      const nuevaLista = esFavorito
+        ? prev.filter(id => id !== productoId)
+        : [...prev, productoId];
+      
+      localStorage.setItem("favoritos", JSON.stringify(nuevaLista));
+      return nuevaLista;
+    });
+  };
 
   useEffect(() => {
     // Productos
@@ -63,21 +90,21 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      
+
       {/* SECCIÓN BUSCADOR (HU #22) */}
       <section className="search-block">
         <h1>Busca ofertas en hoteles, casas y mucho más</h1>
         <p>Encuentra el alojamiento ideal para tus fechas y destino</p>
-        
+
         <div className="search-bar">
           <div className="search-input-wrapper">
-            <input 
-              type="text" 
-              placeholder="¿A dónde vamos?" 
-              className="input-search" 
+            <input
+              type="text"
+              placeholder="¿A dónde vamos?"
+              className="input-search"
               value={busquedaTexto}
               onChange={(e) => setBusquedaTexto(e.target.value)}
-              list="productos-sugeridos" 
+              list="productos-sugeridos"
             />
             <datalist id="productos-sugeridos">
               {productos.map(p => <option key={p.id} value={p.nombre} />)}
@@ -152,8 +179,23 @@ const Home = () => {
             <div key={p.id} className="product-card">
               <div className="img-container">
                 <img src={p.imagenUrl} alt={p.nombre} />
-                <span className="fav-icon">❤️</span>
+
+                {/* BOTÓN DE FAVORITO INTERACTIVO (HU #24) */}
+                <button
+                  className={`fav-btn ${favoritos.includes(p.id) ? 'es-favorito' : ''}`}
+                  onClick={(e) => {
+                    e.preventDefault(); // Evita conflictos si la card tuviera links globales
+                    toggleFavorito(p.id);
+                  }}
+                  title={favoritos.includes(p.id) ? "Quitar de favoritos" : "Agregar a favoritos"}
+                >
+                  {favoritos.includes(p.id) ? '❤️' : '🤍'}
+                </button>
+
+                {/* Tag de categoría sobre la imagen opcional */}
+                <span className="category-tag-float">{p.categoria?.titulo || "Alojamiento"}</span>
               </div>
+
               <div className="product-info">
                 <div className="info-header">
                   <span className="category-tag">{p.categoria?.titulo || "Alojamiento"}</span>
