@@ -141,3 +141,35 @@
     opacity: 0.3;
     cursor: not-allowed;
 }
+
+.card-rating-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.rating-number {
+    background: #1a1a1a;
+    color: #f1c40f;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: 1px solid #f1c40f;
+}
+
+.rating-text {
+    font-size: 0.7rem;
+    color: #888;
+    margin-top: 2px;
+}
+
+.mini-stars {
+    font-size: 0.8rem;
+    color: #f1c40f;
+    margin-bottom: 10px;
+}
+
+.mini-stars small {
+    color: #666;
+    margin-left: 5px;
+}

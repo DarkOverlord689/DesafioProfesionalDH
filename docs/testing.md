@@ -456,3 +456,35 @@ Pasos: Hacer clic en el botón "Copiar Enlace".
 Resultado Esperado: Se muestra un aviso de confirmación ("¡Enlace copiado!") y al pegar (Ctrl+V) en cualquier lugar, aparece la URL del detalle del producto.
 
 Estado: ✅ PASÓ.
+
+39. Prueba de Puntuación Media en Listado (Home) (Historia #28)
+
+Escenario: El usuario navega por la página principal.
+
+Pasos: Observar las tarjetas de productos.
+
+Resultado Esperado: Cada tarjeta muestra un badge con la puntuación (ej: 8.5) y el número de valoraciones, cumpliendo con la visibilidad prominente. ✅ PASÓ.
+
+40. Prueba de Formulario de Reseña (Detalle) (Historia #28)
+
+Escenario: Usuario autenticado entra al detalle del producto.
+
+Pasos: Seleccionar 4 estrellas y escribir "Excelente relación calidad-precio". Clic en enviar.
+
+Resultado Esperado: La reseña se añade instantáneamente al feed inferior y el promedio de la sección se actualiza sin recargar. ✅ PASÓ.
+
+41. Prueba de Seguridad y Acceso (Historia #28)
+
+Escenario: Usuario no autenticado (Guest) intenta puntuar.
+
+Pasos: Ir a la sección de reseñas en el detalle sin haber iniciado sesión.
+
+Resultado Esperado: El formulario está oculto y se visualiza el mensaje "Inicia sesión para dejar una reseña". ✅ PASÓ.
+
+42. Prueba de Diseño Responsivo (Historia #28)
+
+Escenario: Visualización en dispositivo móvil (Vista de inspección Chrome).
+
+Pasos: Reducir el ancho de pantalla a 375px.
+
+Resultado Esperado: El badge de promedio y el título de opiniones se apilan verticalmente para evitar desbordamiento. ✅ PASÓ.

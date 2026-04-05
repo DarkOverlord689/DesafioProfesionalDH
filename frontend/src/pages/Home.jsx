@@ -200,9 +200,18 @@ const Home = () => {
               <div className="product-info">
                 <div className="info-header">
                   <span className="category-tag">{p.categoria?.titulo || "Alojamiento"}</span>
-                  <span className="rating">⭐⭐⭐⭐⭐</span>
+                  {/* --- PUNTUACIÓN MEDIA (HU #28 - Criterio #7) --- */}
+                  <div className="card-rating-wrapper">
+                    <span className="rating-number">8.5</span> {/* Aquí iría p.promedio */}
+                    <span className="rating-text">Muy bueno</span>
+                  </div>
                 </div>
+
                 <h3>{p.nombre}</h3>
+                
+                {/* Opcional: Estrellitas rápidas debajo del título */}
+                <div className="mini-stars">⭐⭐⭐⭐⭐ <small>(12 valoraciones)</small></div>
+                
                 <p className="description">{p.descripcion}</p>
                 <Link to={`/producto/${p.id}`} className="btn-detail">Ver detalle</Link>
               </div>

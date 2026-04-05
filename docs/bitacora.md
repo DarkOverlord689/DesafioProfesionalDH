@@ -75,10 +75,18 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 [x] Historia #27: Compartir producto en redes.
 
-Arquitectura de Componentes: Creación de CompartirModal.jsx, un componente desacoplado que recibe el objeto producto para generar una vista previa dinámica.
+[x] Historia #28: Puntuar producto.
 
-Lógica de Integración: Uso de window.location.href para obtener la URL dinámica del producto y encodeURIComponent para asegurar que los mensajes personalizados y enlaces se procesen correctamente en las APIs de las redes sociales.
+Nomenclatura Técnica: Se optó por el nombre Resenas.jsx (evitando la "ñ") para prevenir conflictos de codificación en sistemas de archivos y despliegue.
 
-Funcionalidades Extra: Implementación de la API navigator.clipboard para permitir el copiado rápido del enlace al portapapeles.
+Componentes Creados: 
 
-UI/UX: Diseño de ventana emergente (Modal) con overlay para mantener el enfoque, incluyendo campos de texto editables para la personalización del mensaje.
+- Resenas.jsx: Gestiona el estado de las valoraciones, el formulario de entrada y el cálculo del promedio.
+
+- Resenas.css: Define la identidad visual del sistema de estrellas con efectos de hover e insignias doradas.
+
+Lógica de Negocio: Cálculo dinámico del promedio (reduce) en tiempo real al añadir nuevas reseñas.
+
+Renderizado condicional del formulario basado en el estado de autenticación del AuthContext.
+
+UI/UX: Integración de "Badges" de puntuación en las cards del Home y en el encabezado del Detalle para maximizar la visibilidad (Criterio #7).
