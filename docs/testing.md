@@ -1,4 +1,4 @@
-🧪 Plan de Pruebas - Sprint 1
+🧪 Plan de Pruebas - Sprint 1 -2 - 3
 1. Prueba de Validación de Duplicados (Historia #3)
 Escenario: Intentar registrar un producto con un nombre que ya existe en la base de datos.
 
@@ -488,3 +488,35 @@ Escenario: Visualización en dispositivo móvil (Vista de inspección Chrome).
 Pasos: Reducir el ancho de pantalla a 375px.
 
 Resultado Esperado: El badge de promedio y el título de opiniones se apilan verticalmente para evitar desbordamiento. ✅ PASÓ.
+
+43. Prueba de Acceso Administrativo
+
+Escenario: Un usuario con rol "USER" intenta acceder a la URL de gestión de categorías.
+
+Resultado Esperado: El sistema debe redirigir al Home o mostrar "Acceso Denegado". Solo el "ADMIN" debe ver el botón de eliminar.
+
+Estado: ✅ PASÓ.
+
+44. Prueba de Confirmación Preventiva
+
+Pasos: 1. Ir al Panel Admin. 2. En la lista de categorías, hacer clic en "Eliminar" sobre la categoría "Hoteles".
+
+Resultado Esperado: Debe aparecer un mensaje emergente preguntando: "¿Estás seguro de que deseas eliminar la categoría 'Hoteles'? Esta acción no se puede deshacer".
+
+Estado: ✅ PASÓ.
+
+45. Cancelación de la Acción
+
+Pasos: En el mensaje de confirmación anterior, hacer clic en "Cancelar".
+
+Resultado Esperado: La categoría debe permanecer intacta en la lista y no se debe realizar ninguna petición a la API.
+
+Estado: ✅ PASÓ.
+
+46. Confirmación y Refresco de Interfaz
+
+Pasos: Hacer clic en "Confirmar" eliminación.
+
+Resultado Esperado: 1. Se envía la petición DELETE. 2. Se muestra un mensaje de éxito. 3. La lista de categorías se actualiza automáticamente eliminando la fila correspondiente sin necesidad de recargar manualmente.
+
+Estado: ✅ PASÓ.

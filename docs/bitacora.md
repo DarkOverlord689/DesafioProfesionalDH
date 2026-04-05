@@ -77,16 +77,12 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 [x] Historia #28: Puntuar producto.
 
-Nomenclatura Técnica: Se optó por el nombre Resenas.jsx (evitando la "ñ") para prevenir conflictos de codificación en sistemas de archivos y despliegue.
+[x] Historia #29: Eliminar categoria.
 
-Componentes Creados: 
+Interfaz de Usuario: Integración de un botón de eliminación (ícono de basura o texto "Eliminar") en la tabla de gestión de categorías dentro del Panel de Administración.
 
-- Resenas.jsx: Gestiona el estado de las valoraciones, el formulario de entrada y el cálculo del promedio.
+Mecanismo de Seguridad: Implementación de un window.confirm() o un Modal de confirmación personalizado para interceptar la acción de borrado.
 
-- Resenas.css: Define la identidad visual del sistema de estrellas con efectos de hover e insignias doradas.
+Lógica de Integración: Conexión con el endpoint DELETE /api/categorias/{id}.
 
-Lógica de Negocio: Cálculo dinámico del promedio (reduce) en tiempo real al añadir nuevas reseñas.
-
-Renderizado condicional del formulario basado en el estado de autenticación del AuthContext.
-
-UI/UX: Integración de "Badges" de puntuación en las cards del Home y en el encabezado del Detalle para maximizar la visibilidad (Criterio #7).
+Gestión de Errores: Se añadió una validación para informar al usuario si la categoría no puede ser eliminada debido a restricciones de integridad referencial (por ejemplo, si tiene productos activos y el backend no permite el borrado en cascada).
