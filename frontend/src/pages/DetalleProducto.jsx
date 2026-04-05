@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Politicas from '../components/Politicas';
+import Disponibilidad from '../components/Disponibilidad';
 import './DetalleProducto.css';
 
 const DetalleProducto = () => {
@@ -73,6 +74,8 @@ const DetalleProducto = () => {
                 )}
                 {/* ------------------------------------- */}
             </section>
+            {/* HU #23: Calendario de Disponibilidad */}
+            <Disponibilidad fechasReservadas={[new Date(2024, 10, 20), new Date(2024, 10, 21)]} />
             {/* --- POLÍTICAS (HU #26) --- */}
             <Politicas />
         </div>

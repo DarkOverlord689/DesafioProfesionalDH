@@ -1,0 +1,77 @@
+.disponibilidad-seccion {
+    width: 100%;
+    padding: 40px 50px;
+    background-color: transparent;
+    margin-top: 20px;
+}
+
+.disponibilidad-flex {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    background-color: #232323;
+    padding: 30px;
+    border-radius: 12px;
+}
+
+.calendario-contenedor {
+    flex: 2;
+}
+
+.react-datepicker {
+    background-color: #2c2c2c !important;
+    border: none !important;
+    color: white !important;
+}
+
+.react-datepicker__header {
+    background-color: #2c2c2c !important;
+    border-bottom: 1px solid #444 !important;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__current-month {
+    color: white !important;
+}
+
+.reserva-card {
+    flex: 1;
+    background: #2c2c2c;
+    padding: 25px;
+    border-radius: 8px;
+    color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.react-datepicker__day:hover {
+    background-color: #1DB954 !important;
+    border-radius: 50%;
+}
+
+.btn-reserva {
+    background-color: #1DB954;
+    color: white;
+    width: 100%;
+}
+
+.btn-reserva:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Manejo de errores */
+.error-disponibilidad {
+    padding: 20px;
+    background-color: #ffebee;
+    color: #c62828;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.btn-reintentar {
+    margin-top: 10px;
+    padding: 8px 16px;
+    cursor: pointer;
+}

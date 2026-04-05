@@ -65,10 +65,14 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 [x] Historia #22: Realizar busqueda.
 
+[x] Historia #23: Visualizar disponibilidad.
+
 [x] Historia #26: Visualización políticas del producto.
 
-Frontend: Creación del componente Politicas.jsx para centralizar la información legal y de seguridad del producto.
+Componentes: Creación de Disponibilidad.jsx con modo inline para mostrar el calendario siempre abierto.
 
-Diseño: Aplicación de estilos CSS para cumplir con la distribución en tres columnas (Normas, Salud, Cancelación).
+Lógica: Implementación de la propiedad excludeDates para bloquear visualmente los días no disponibles.
 
-UX/UI: Implementación del título principal con subrayado destacado y contenedor al 100% del ancho de la página de detalle.
+UX/UI: Diseño adaptado al modo oscuro del sitio, eliminando fondos genéricos para una integración orgánica.
+
+Resiliencia: Añadido de bloque de control de errores con opción de reintento para la carga de datos de disponibilidad.

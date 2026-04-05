@@ -342,3 +342,33 @@ La información está organizada en 3 columnas claras.
 El bloque ocupa todo el ancho de la pantalla (100% container).
 
 Estado: ✅ PASÓ.
+
+27. Prueba de Visualización de Calendario Doble (Historia #23)
+
+Escenario: El usuario revisa la disponibilidad en el detalle del producto.
+
+Pasos: 1. Entrar al detalle de un producto. 2. Ubicar la sección "Fechas disponibles".
+
+Resultado Esperado: Se muestran dos meses simultáneamente en un diseño integrado al tema oscuro.
+
+Estado: ✅ PASÓ.
+
+28. Prueba de Bloqueo de Fechas (Ocupadas) (Historia #23)
+
+Escenario: El sistema debe impedir seleccionar días ya reservados.
+
+Pasos: Intentar hacer clic en una fecha marcada como ocupada (configurada en el array de prueba).
+
+Resultado Esperado: La fecha no es seleccionable y tiene un estilo visual distinto (opacidad o color gris).
+
+Estado: ✅ PASÓ.
+
+29. Prueba de Manejo de Errores (Historia #23)
+
+Escenario: Simulación de caída del servicio de disponibilidad.
+
+Pasos: Forzar el estado de error en el componente.
+
+Resultado Esperado: Aparece un mensaje claro y un botón de "Intentar nuevamente".
+
+Estado: ✅ PASÓ.
