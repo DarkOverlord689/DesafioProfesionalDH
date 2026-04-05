@@ -396,3 +396,33 @@ Pasos: Hacer clic en un producto ya marcado como favorito.
 Resultado Esperado: El icono vuelve a su estado inicial (🤍) y se elimina del almacenamiento local.
 
 Estado: ✅ PASÓ.
+
+33. Prueba de Acceso y Seguridad (Historia #25)
+
+Escenario: Un usuario intenta entrar a /favoritos.
+
+Pasos: 1. Cerrar sesión. 2. Intentar entrar a la URL manualmente. 3. Iniciar sesión y usar el link del Header.
+
+Resultado Esperado: Sin sesión, el ProtectedRoute lo redirige al Login. Con sesión, el link en el Header lo lleva correctamente a su lista.
+
+Estado: ✅ PASÓ.
+
+34. Prueba de Sincronización en Tiempo Real (Historia #25)
+
+Escenario: El usuario desmarca un favorito desde la sección "Mis Favoritos".
+
+Pasos: 1. Ir a la página de favoritos. 2. Hacer clic en "Quitar" o en el corazón rojo.
+
+Resultado Esperado: El producto desaparece de la grilla de favoritos inmediatamente y el contador del localStorage se actualiza.
+
+Estado: ✅ PASÓ.
+
+35. Prueba de Estado Vacío (Empty State) (Historia #25)
+
+Escenario: El usuario no tiene ningún favorito guardado.
+
+Pasos: Eliminar todos los favoritos y entrar a la sección.
+
+Resultado Esperado: Se muestra un mensaje amigable indicando que no hay favoritos y un botón para volver a explorar.
+
+Estado: ✅ PASÓ.

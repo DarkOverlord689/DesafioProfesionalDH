@@ -5,6 +5,7 @@ import './Header.css';
 
 const Header = () => {
   const { user, logout, getInitials } = useAuth();
+
   return (
     <header className="header">
       <Link to="/" style={{ textDecoration: 'none' }}>
@@ -13,18 +14,26 @@ const Header = () => {
           <span className="slogan">Sentite como en tu hogar</span>
         </div>
       </Link>
+
       <div className="auth-buttons">
         {user ? (
-          /* ESCENARIO: USUARIO LOGUEADO (HU #14 y #15) */
+          /* ESCENARIO: USUARIO LOGUEADO */
           <div className="user-nav">
+
+            {/* ACCESO A FAVORITOS (HU #25) */}
+            <Link to="/favoritos" className="fav-header-link" title="Ver mis favoritos">
+              ❤️ Mis Favoritos
+            </Link>
+
             {user.rol === "ADMIN" && (
               <Link to="/administracion">
                 <button className="btn-secondary">Panel Admin</button>
               </Link>
             )}
+
             <div className="user-info">
               <div className="avatar-circle">
-                {getInitials()} 
+                {getInitials()}
               </div>
               <div className="user-text">
                 <span className="welcome-msg">Hola,</span>

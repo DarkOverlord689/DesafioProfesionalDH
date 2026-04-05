@@ -1,0 +1,43 @@
+.favoritos-container {
+    padding: 40px 50px;
+    min-height: 70vh;
+}
+
+.fav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.fav-header h1 {
+    color: #383B58;
+    border-bottom: 3px solid #1DB954;
+}
+
+.fav-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn-remove {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+/* Responsividad (Criterio HU #25) */
+@media (max-width: 768px) {
+    .favoritos-container {
+        padding: 20px;
+    }
+    .fav-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+}

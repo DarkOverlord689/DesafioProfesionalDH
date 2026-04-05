@@ -7,6 +7,7 @@ import Administracion from './pages/Administracion';
 import DetalleProducto from './pages/DetalleProducto';
 import Registro from './pages/Registro';
 import Login from "./login/Login";
+import Favoritos from './pages/Favoritos';
 import ProtectedRoute from './components/ProtectedRoute';
 import GestionUsuarios from './components/GestionUsuarios';
 import './App.css';
@@ -21,6 +22,14 @@ function App() {
           {/* AUTHS */}
           <Route path="/registro" element={<Registro />} />
           <Route path="/login" element={<Login />} />
+          <Route
+            path="/favoritos"
+            element={
+              <ProtectedRoute>
+                <Favoritos />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/administracion"
             element={

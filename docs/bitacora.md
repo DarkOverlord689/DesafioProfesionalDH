@@ -69,12 +69,14 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 [x] Historia #24: Marcar como favorito.
 
+[x] Historia #25: Listar productos favoritos.
+
 [x] Historia #26: Visualización políticas del producto.
 
-Lógica: Integración de AuthContext para restringir la acción a usuarios logueados.
+Arquitectura: Creación de la página Favoritos.jsx con lógica de filtrado dinámico basada en la API de productos y el almacenamiento local.
 
-Persistencia: Uso de localStorage para que los favoritos no se borren al recargar la página.
+Integración: Actualización del App.jsx para incluir la ruta protegida /favoritos y del Header.jsx para proporcionar un acceso directo e intuitivo.
 
-Interfaz: Creación de un botón interactivo (Toggle) con cambio de estado visual (🤍 / ❤️) y posicionamiento absoluto sobre la imagen del producto.
+Funcionalidad: Implementación de eliminación reactiva; al quitar un producto de la lista, la UI se actualiza instantáneamente sin recargar la página.
 
-UX: Implementación de alertas de prevención para usuarios no autenticados.
+UX/UI: Diseño responsivo que mantiene la consistencia visual del "Dark Mode" y el sistema de grillas utilizado en el Home.

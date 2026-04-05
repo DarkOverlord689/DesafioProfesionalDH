@@ -11,6 +11,7 @@ import './home.css';
 registerLocale('es', es);
 
 const Home = () => {
+  const { user } = useAuth();
   const [productos, setProductos] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(null); // HU #20
@@ -24,7 +25,7 @@ const Home = () => {
   // --- Paginacion HU #8  ---
   const [paginaActual, setPaginaActual] = useState(1);
   const productosPorPagina = 10; // Criterio HU #8
-  
+
   // --- HU #24: Favoritos ---
   const [favoritos, setFavoritos] = useState(() => {
     const saved = localStorage.getItem("favoritos");
@@ -45,7 +46,7 @@ const Home = () => {
       const nuevaLista = esFavorito
         ? prev.filter(id => id !== productoId)
         : [...prev, productoId];
-      
+
       localStorage.setItem("favoritos", JSON.stringify(nuevaLista));
       return nuevaLista;
     });
