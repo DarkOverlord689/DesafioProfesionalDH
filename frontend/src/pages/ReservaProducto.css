@@ -1,0 +1,139 @@
+.reserva-container {
+    padding: 40px 5%;
+    background-color: #121212;
+    min-height: 90vh;
+    color: white;
+}
+
+.reserva-header h1 {
+    font-size: 2rem;
+    color: #f1c40f;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+.reserva-layout {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr; /* Izquierda más ancha que derecha */
+    gap: 30px;
+    align-items: start;
+}
+
+/* SECCIÓN IZQUIERDA */
+.reserva-main {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-datos-usuario, .calendario-reserva {
+    background: #1e1e1e;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #333;
+}
+
+.reserva-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.reserva-inputs input {
+    background: #2a2a2a;
+    border: 1px solid #444;
+    color: #888; /* Color de texto deshabilitado */
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: not-allowed;
+}
+
+/* CUSTOMIZACIÓN DEL CALENDARIO */
+.react-datepicker {
+    background-color: #1e1e1e !important;
+    border: 1px solid #f1c40f !important;
+    font-family: inherit !important;
+}
+
+.react-datepicker__header {
+    background-color: #2a2a2a !important;
+    border-bottom: 1px solid #444 !important;
+}
+
+.react-datepicker__current-month, .react-datepicker__day-name {
+    color: #f1c40f !important;
+}
+
+.react-datepicker__day {
+    color: white !important;
+}
+
+.react-datepicker__day--selected, .react-datepicker__day--in-range {
+    background-color: #f1c40f !important;
+    color: #1a1a1a !important;
+}
+
+.react-datepicker__day--disabled {
+    color: #444 !important;
+    text-decoration: line-through;
+}
+
+/* COLUMNA DERECHA (RESUMEN) */
+.reserva-resumen {
+    background: #1e1e1e;
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid #f1c40f;
+    position: sticky;
+    top: 100px;
+}
+
+.resumen-info p {
+    margin: 15px 0;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.resumen-info span {
+    font-weight: bold;
+    color: #f1c40f;
+}
+
+.btn-confirmar-final {
+    width: 100%;
+    background: #f1c40f;
+    color: #1a1a1a;
+    border: none;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.2s;
+}
+
+.btn-confirmar-final:disabled {
+    background: #555;
+    color: #888;
+    cursor: not-allowed;
+}
+
+.btn-confirmar-final:hover:not(:disabled) {
+    transform: scale(1.02);
+    background: #d4ac0d;
+}
+
+/* RESPONSIVE */
+@media (max-width: 968px) {
+    .reserva-layout {
+        grid-template-columns: 1fr;
+    }
+    .reserva-resumen {
+        position: static;
+    }
+}

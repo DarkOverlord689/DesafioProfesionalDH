@@ -253,3 +253,36 @@
 .btn-share-trigger i {
     margin-right: 5px;
 }
+
+.reserva-card-detalle {
+    background: #1e1e1e;
+    border: 1px solid #f1c40f;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.reserva-prompt {
+    color: #ccc;
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.btn-reserva-start {
+    background: #f1c40f;
+    color: #1a1a1a;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s ease;
+}
+
+.btn-reserva-start:hover {
+    background: #d4ac0d;
+}

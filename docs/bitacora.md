@@ -1,4 +1,4 @@
-# 📑 Bitácora de Proyecto - Sprint 1 (Definición Técnica Final)
+# 📑 Bitácora de Proyecto - Sprint 4
 
 🎯 1. Definición del Proyecto
 Nombre de la Aplicación: Darksishop
@@ -79,10 +79,12 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 [x] Historia #29: Eliminar categoria.
 
-Interfaz de Usuario: Integración de un botón de eliminación (ícono de basura o texto "Eliminar") en la tabla de gestión de categorías dentro del Panel de Administración.
+[x] Historia #30: Seleccionar fecha de reserva.
 
-Mecanismo de Seguridad: Implementación de un window.confirm() o un Modal de confirmación personalizado para interceptar la acción de borrado.
+[x] Historia #32: Realizar reserva.
 
-Lógica de Integración: Conexión con el endpoint DELETE /api/categorias/{id}.
+Frontend: Creación de ReservaProducto.jsx con integración de react-datepicker en modo inline. Implementación de lógica de redirección inteligente post-login.
 
-Gestión de Errores: Se añadió una validación para informar al usuario si la categoría no puede ser eliminada debido a restricciones de integridad referencial (por ejemplo, si tiene productos activos y el backend no permite el borrado en cascada).
+Backend: Creación de entidad Reserva, ReservaRepository y ReservaController con endpoint POST para recibir y guardar reservas vinculadas a usuarios y productos.
+
+Base de Datos: Mapeo automático de la tabla reservas con relaciones de llave foránea.

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
 import './Login.css';
 
@@ -8,7 +8,9 @@ const Login = () => {
     const [error, setError] = useState('');
     const { login } = useAuth();
     const navigate = useNavigate();
-
+    const location = useLocation();
+    const mensajeAlerta = location.state?.mensaje;
+    
     const handleChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     };
@@ -27,7 +29,8 @@ const Login = () => {
             if (response.ok) {
                 const userData = await response.json();
                 login(userData); // Guarda en Context y LocalStorage
-                navigate('/'); // Redirige al Home
+                const pathPrevio = location.state?.from || '/';
+                navigate(pathPrevio);
             } else {
                 // Captura el error del backend (HU #14: mensaje claro)
                 const msg = await response.text();
@@ -41,33 +44,40 @@ const Login = () => {
     return (
         <div className="login-wrapper">
             <div className="login-container">
+                {/* --- CRITERIO HU #30: Mensaje de login obligatorio para reservar --- */}
+                {mensajeAlerta && (
+                    <div className="alerta-reserva-login">
+                        <i className="fas fa-exclamation-triangle"></i>
+                        <p>{mensajeAlerta}</p>
+                    </div>
+                )}
                 <h2 className="login-title">Iniciar Sesión</h2>
                 <p className="login-subtitle">Accede a tus reservas y beneficios exclusivos</p>
-                
+
                 <form onSubmit={handleSubmit} className="login-form">
                     <div className="form-group">
                         <label htmlFor="email">Correo Electrónico</label>
-                        <input 
-                            type="email" 
+                        <input
+                            type="email"
                             id="email"
-                            name="email" 
+                            name="email"
                             placeholder="ejemplo@mail.com"
                             value={credentials.email}
-                            onChange={handleChange} 
-                            required 
+                            onChange={handleChange}
+                            required
                         />
                     </div>
-                    
+
                     <div className="form-group">
                         <label htmlFor="password">Contraseña</label>
-                        <input 
-                            type="password" 
+                        <input
+                            type="password"
                             id="password"
-                            name="password" 
+                            name="password"
                             placeholder="********"
                             value={credentials.password}
-                            onChange={handleChange} 
-                            required 
+                            onChange={handleChange}
+                            required
                         />
                     </div>
 

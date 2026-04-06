@@ -3,12 +3,14 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Politicas from '../components/Politicas';
 import Disponibilidad from '../components/Disponibilidad';
+import { useAuth } from '../context/AuthContext';
 import './DetalleProducto.css';
 import CompartirModal from '../components/CompartirModal';
 
 const DetalleProducto = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { user } = useAuth();
     const [producto, setProducto] = useState(null);
     const [error, setError] = useState(false);
     const [showShare, setShowShare] = useState(false);
@@ -21,6 +23,20 @@ const DetalleProducto = () => {
                 setError(true);
             });
     }, [id]);
+
+    const handleReservaClick = () => {
+        if (!user) {
+            // Si no está logueado, mandamos al login con el mensaje requerido
+            navigate('/login', {
+                state: {
+                    mensaje: "Para realizar una reserva, debes iniciar sesión primero. Si no tienes cuenta, por favor regístrate."
+                }
+            });
+        } else {
+            // Si está logueado, vamos a la nueva página de reserva
+            navigate(`/producto/${id}/reserva`);
+        }
+    };
 
     if (error) return <div className="error-msg">Error: No se encontró el producto {id}</div>;
     if (!producto) return <div className="loading-msg">Cargando datos...</div>;
@@ -61,28 +77,37 @@ const DetalleProducto = () => {
                 </div>
             </section>
 
-            {/* CUERPO Y CARACTERÍSTICAS (NUEVA SECCIÓN HU #18) */}
+            {/* CUERPO Y DESCRIPCIÓN */}
             <section className="detalle-body">
-                <h2>Descripción del alojamiento</h2>
-                <p className="descripcion-txt">{producto.descripcion}</p>
+                <div className="descripcion-col">
+                    <h2>Descripción del alojamiento</h2>
+                    <p className="descripcion-txt">{producto.descripcion}</p>
+                </div>
 
-                {/* --- SPRINT 2 --- */}
-                {producto.caracteristicas && producto.caracteristicas.length > 0 && (
-                    <div className="detalle-caracteristicas-bloque">
-                        <h2 className="titulo-caracteristicas">Características</h2>
-                        <hr className="separador-dorado" />
-                        <div className="caracteristicas-grid-final">
-                            {producto.caracteristicas.map(car => (
-                                <div key={car.id} className="caracteristica-item-card">
-                                    <i className={`fas ${car.icono} icon-estilo`}></i>
-                                    <span className="char-name">{car.nombre}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
-                {/* ------------------------------------- */}
+                {/* --- NUEVO: BLOQUE DE ACCESO A RESERVA (HU #30) --- */}
+                <div className="reserva-card-detalle">
+                    <p className="reserva-prompt">Agregá tus fechas de viaje para obtener precios exactos</p>
+                    <button onClick={handleReservaClick} className="btn-reserva-start">
+                        Iniciar reserva
+                    </button>
+                </div>
             </section>
+
+            {/* CARACTERÍSTICAS */}
+            {producto.caracteristicas && producto.caracteristicas.length > 0 && (
+                <section className="caracteristicas-seccion">
+                    <h2 className="titulo-caracteristicas">¿Qué ofrece este lugar?</h2>
+                    <hr className="separador-dorado" />
+                    <div className="caracteristicas-grid-final">
+                        {producto.caracteristicas.map(car => (
+                            <div key={car.id} className="caracteristica-item-card">
+                                <i className={`fas ${car.icono} icon-estilo`}></i>
+                                <span className="char-name">{car.nombre}</span>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            )}
             {/* HU #23: Calendario de Disponibilidad */}
             <Disponibilidad fechasReservadas={[new Date(2024, 10, 20), new Date(2024, 10, 21)]} />
             {/* --- POLÍTICAS (HU #26) --- */}

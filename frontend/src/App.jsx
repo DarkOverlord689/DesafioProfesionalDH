@@ -10,6 +10,7 @@ import Login from "./login/Login";
 import Favoritos from './pages/Favoritos';
 import ProtectedRoute from './components/ProtectedRoute';
 import GestionUsuarios from './components/GestionUsuarios';
+import ReservaProducto from './pages/ReservaProducto';
 import './App.css';
 
 function App() {
@@ -47,6 +48,14 @@ function App() {
             }
           />
           <Route path="/producto/:id" element={<DetalleProducto />} />
+          <Route
+            path="/producto/:id/reserva"
+            element={
+              <ProtectedRoute>
+                <ReservaProducto />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </main>
       <Footer />

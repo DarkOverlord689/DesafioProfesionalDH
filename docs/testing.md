@@ -520,3 +520,31 @@ Pasos: Hacer clic en "Confirmar" eliminación.
 Resultado Esperado: 1. Se envía la petición DELETE. 2. Se muestra un mensaje de éxito. 3. La lista de categorías se actualiza automáticamente eliminando la fila correspondiente sin necesidad de recargar manualmente.
 
 Estado: ✅ PASÓ.
+
+47. Validación de Login Obligatorio (HU #30)
+Pasos: 1. Cerrar sesión. 2. Intentar acceder a un producto y hacer clic en el botón "Iniciar reserva".
+
+Resultado Esperado: 1. El sistema redirige automáticamente a la pantalla de /login. 2. Se muestra un mensaje de advertencia indicando que es necesario iniciar sesión para reservar.
+
+Estado: ✅ PASÓ.
+
+48. Selección y Visualización de Fechas (HU #30)
+Pasos: 1. Iniciar sesión. 2. Entrar a la página de reserva de un producto. 3. Seleccionar un rango de fechas en el calendario inline.
+
+Resultado Esperado: 1. El calendario marca visualmente el rango seleccionado. 2. Los campos de "Check-in" y "Check-out" en la tarjeta de resumen se actualizan instantáneamente con las fechas elegidas.
+
+Estado: ✅ PASÓ.
+
+49. Persistencia de Reserva en Base de Datos (HU #32)
+Pasos: 1. Con las fechas seleccionadas, hacer clic en "Confirmar reserva". 2. Verificar la respuesta del servidor y la base de datos.
+
+Resultado Esperado: 1. Se envía una petición POST exitosa a /api/reservas. 2. Se muestra un mensaje de éxito (Alert/Swal). 3. Se crea una nueva fila en la tabla reservas de MySQL vinculando correctamente el usuario_id y el producto_id.
+
+Estado: ✅ PASÓ.
+
+50. Restricción de Selección de Fechas (HU #30)
+Pasos: 1. Intentar seleccionar un rango de fechas que incluya días marcados como "no disponibles" (clase excludeDates).
+
+Resultado Esperado: El DatePicker bloquea la selección de esos días, impidiendo que formen parte del rango de reserva.
+
+Estado: ✅ PASÓ.
