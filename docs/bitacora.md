@@ -81,10 +81,12 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 [x] Historia #30: Seleccionar fecha de reserva.
 
+[x] Historia #31: Visualizar detalles de reserva.
+
 [x] Historia #32: Realizar reserva.
 
-Frontend: Creación de ReservaProducto.jsx con integración de react-datepicker en modo inline. Implementación de lógica de redirección inteligente post-login.
+Frontend: Creación de ReservaProducto.jsx con integración de react-datepicker en modo inline. Implementación de lógica para capturar startDate y endDate y enviarlos al backend. Ajuste de estilos en ReservaProducto.css para asegurar legibilidad de datos del usuario y renderizado correcto de la imagen del producto.
 
 Backend: Creación de entidad Reserva, ReservaRepository y ReservaController con endpoint POST para recibir y guardar reservas vinculadas a usuarios y productos.
 
-Base de Datos: Mapeo automático de la tabla reservas con relaciones de llave foránea.
+Base de Datos: Mapeo automático de la tabla reservas con relaciones de llave foránea (usuario_id, producto_id).

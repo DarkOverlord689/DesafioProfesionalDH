@@ -548,3 +548,11 @@ Pasos: 1. Intentar seleccionar un rango de fechas que incluya días marcados com
 Resultado Esperado: El DatePicker bloquea la selección de esos días, impidiendo que formen parte del rango de reserva.
 
 Estado: ✅ PASÓ.
+
+51. Integración de Imagen y Detalle (HU #31)
+
+Pasos: 1. Cargar la página de reserva de un producto específico. 2. Verificar que la imagen en el resumen lateral coincida con el producto.
+
+Resultado Esperado: La imagen carga correctamente desde el campo imagenUrl o el array de imagenes del JSON, manteniendo el aspect ratio definido en el CSS.
+
+Estado: ✅ PASÓ.
