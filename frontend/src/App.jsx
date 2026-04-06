@@ -11,6 +11,7 @@ import Favoritos from './pages/Favoritos';
 import ProtectedRoute from './components/ProtectedRoute';
 import GestionUsuarios from './components/GestionUsuarios';
 import ReservaProducto from './pages/ReservaProducto';
+import MisReservas from './pages/MisReservas';
 import './App.css';
 
 function App() {
@@ -53,6 +54,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <ReservaProducto />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/mis-reservas"
+            element={
+              <ProtectedRoute>
+                <MisReservas />
               </ProtectedRoute>
             }
           />

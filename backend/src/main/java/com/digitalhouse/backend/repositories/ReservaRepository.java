@@ -7,9 +7,8 @@ import java.util.List;
 
 @Repository
 public interface ReservaRepository extends JpaRepository<Reserva, Long> {
-    // Esto nos servirá luego para mostrar las reservas de un usuario específico
+    // Busca reservas por el ID del usuario vinculado
     List<Reserva> findByUsuarioId(Long usuarioId);
-
-    // Esto servirá para bloquear fechas ya reservadas de un producto
+    
     List<Reserva> findByProductoId(Long productoId);
 }

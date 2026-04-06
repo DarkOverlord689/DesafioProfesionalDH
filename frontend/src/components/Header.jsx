@@ -25,6 +25,11 @@ const Header = () => {
               ❤️ Mis Favoritos
             </Link>
 
+            {/* --- ACCESO A HISTORIAL (HU #33) --- */}
+            <Link to="/mis-reservas" className="fav-header-link" title="Ver mi historial de reservas">
+              🏨 Mis Reservas
+            </Link>
+
             {user.rol === "ADMIN" && (
               <Link to="/administracion">
                 <button className="btn-secondary">Panel Admin</button>

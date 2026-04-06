@@ -556,3 +556,22 @@ Pasos: 1. Cargar la página de reserva de un producto específico. 2. Verificar 
 Resultado Esperado: La imagen carga correctamente desde el campo imagenUrl o el array de imagenes del JSON, manteniendo el aspect ratio definido en el CSS.
 
 Estado: ✅ PASÓ.
+
+52. Visualización de Historial (HU #33)
+
+Pasos: 
+
+Iniciar sesión. 
+Clic en "Mis Reservas".
+
+Resultado Esperado: Se listan las reservas reales del usuario con foto, fechas y nombre del producto.
+
+Estado: ✅ PASÓ.
+
+63. Validación de Endpoint (HU #33)
+
+Pasos: Probar URL /api/reservas/usuario/{id}.
+
+Resultado Esperado: El JSON responde con la lista correcta (Status 200 OK) y sin errores 404.
+
+Estado: ✅ PASÓ.
