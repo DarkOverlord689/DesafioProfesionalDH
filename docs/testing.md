@@ -575,3 +575,19 @@ Pasos: Probar URL /api/reservas/usuario/{id}.
 Resultado Esperado: El JSON responde con la lista correcta (Status 200 OK) y sin errores 404.
 
 Estado: ✅ PASÓ.
+
+64. Persistencia Global (HU #34)
+
+Pasos: Navegar de Home a DetalleProducto y luego a Login.
+
+Resultado: El ícono de WhatsApp permanece fijo en la esquina inferior derecha en todas las vistas.
+
+Estado: ✅ PASÓ.
+
+65. Superposición (Z-Index) (HU #34)
+
+Pasos: Hacer scroll en una página con mucho contenido.
+
+Resultado: El botón siempre queda por encima del contenido y del footer gracias al z-index configurado.
+
+Estado: ✅ PASÓ.

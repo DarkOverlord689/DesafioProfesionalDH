@@ -87,8 +87,12 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 [x] Historia #33: Acceder a historial.
 
-Frontend: Creación de MisReservas.jsx y estilos. Consumo de API mediante axios filtrando por usuario_id. Integración de acceso en el Header.jsx.
+[x] Historia #34: Whatsapp - Iniciar chat.
 
-Backend: Creación de ReservaService.java. Implementación de endpoint GET /api/reservas/usuario/{id} en el controlador y método findByUsuarioId en el repositorio.
+Frontend:
 
-Base de Datos: Verificación de relación entre tablas reservas y usuarios.
+Integración del componente WhatsappButton en el layout principal (App.jsx).
+
+Verificación de que el botón sea accesible de forma global, independientemente de la ruta activa.
+
+El componente funciona de manera independiente al sistema de rutas, cumpliendo el criterio de ser visible para usuarios no autenticados.
