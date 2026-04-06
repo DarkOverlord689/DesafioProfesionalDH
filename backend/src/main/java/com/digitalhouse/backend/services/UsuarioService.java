@@ -40,8 +40,7 @@ public class UsuarioService {
             emailService.enviarCorreoConfirmacion(usuarioGuardado);
             System.out.println("Email de confirmación enviado a: " + usuarioGuardado.getEmail());
         } catch (Exception e) {
-            // Si el mail falla, el usuario ya está guardado, así que solo avisamos en
-            // consola
+
             System.err.println("Error al enviar el email de bienvenida: " + e.getMessage());
         }
 
@@ -62,10 +61,6 @@ public class UsuarioService {
         // 1. Buscar al usuario por email
         Usuario usuario = usuarioRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-
-        // 2. Verificar la contraseña (suponiendo que usas BCrypt)
-        // Si NO usas encriptación aún, sería:
-        // if(usuario.getPassword().equals(request.getPassword()))
         if (passwordEncoder.matches(request.getPassword(), usuario.getPassword())) {
             return usuario;
         } else {
@@ -83,5 +78,15 @@ public class UsuarioService {
 
     public List<Usuario> listarTodos() {
         return usuarioRepository.findAll();
+    }
+
+    public Usuario guardarUsuario(Usuario usuario) {
+        Usuario nuevoUsuario = usuarioRepository.save(usuario);
+        try {
+            emailService.enviarCorreoConfirmacion(nuevoUsuario);
+        } catch (Exception e) {
+            System.out.println("Error enviando mail de registro: " + e.getMessage());
+        }
+        return nuevoUsuario;
     }
 }

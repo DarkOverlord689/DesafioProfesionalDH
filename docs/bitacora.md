@@ -89,10 +89,10 @@ Persistencia: MySQL 8.0 + Spring Data JPA.
 
 [x] Historia #34: Whatsapp - Iniciar chat.
 
-Frontend:
+[x] Historia #35:  Notificación: Confirmar reserva por correo.
 
-Integración del componente WhatsappButton en el layout principal (App.jsx).
+Backend: Se integró EmailService en ReservaService. El sistema envía un correo automático con los detalles (Producto y Fechas) al persistir la reserva en la DB.
 
-Verificación de que el botón sea accesible de forma global, independientemente de la ruta activa.
+Seguridad: Uso de try-catch para que la reserva se guarde aunque el servidor de correo falle.
 
-El componente funciona de manera independiente al sistema de rutas, cumpliendo el criterio de ser visible para usuarios no autenticados.
+Infraestructura: Configuración activa mediante Mailtrap en application.properties.

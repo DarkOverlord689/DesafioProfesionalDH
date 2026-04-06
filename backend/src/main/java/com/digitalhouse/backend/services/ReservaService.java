@@ -12,6 +12,9 @@ public class ReservaService {
     @Autowired
     private ReservaRepository reservaRepository;
 
+    @Autowired
+    private EmailService emailService;
+
     public List<Reserva> buscarPorUsuarioId(Long id) {
         return reservaRepository.findByUsuarioId(id);
     }
@@ -21,6 +24,16 @@ public class ReservaService {
     }
 
     public Reserva guardar(Reserva reserva) {
-        return reservaRepository.save(reserva);
+        Reserva reservaGuardada = reservaRepository.save(reserva);
+
+        try {
+            emailService.enviarCorreoReserva(reservaGuardada);
+            System.out.println("Email de reserva enviado con éxito.");
+        } catch (Exception e) {
+            System.err.println("Error al enviar el email: " + e.getMessage());
+        }
+
+        return reservaGuardada;
+
     }
 }

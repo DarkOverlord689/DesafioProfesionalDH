@@ -591,3 +591,27 @@ Pasos: Hacer scroll en una página con mucho contenido.
 Resultado: El botón siempre queda por encima del contenido y del footer gracias al z-index configurado.
 
 Estado: ✅ PASÓ.
+
+66. Disparo de Notificación Automática (HU #35)
+
+Pasos: Realizar una reserva desde el Frontend en http://localhost:5173/reserva.
+
+Resultado: Al confirmar, el sistema persiste la reserva en MySQL y la consola de Spring Boot muestra "Email de reserva enviado con éxito".
+
+Estado: ✅ PASÓ.
+
+67. Integridad del Contenido del Email (HU #35)
+
+Pasos: Abrir la bandeja de entrada en Mailtrap.
+
+Resultado: El correo recibido contiene el nombre exacto del producto reservado y las fechas de check-in/check-out seleccionadas.
+
+Estado: ✅ PASÓ.
+
+68. Resiliencia del Proceso (HU #35)
+
+Pasos: Simular caída del servidor SMTP (cambiar puerto en config) y realizar una reserva.
+
+Resultado: La reserva se guarda correctamente en la base de datos y el flujo del Frontend no se interrumpe, capturando el error solo en logs.
+
+Estado: ✅ PASÓ.
