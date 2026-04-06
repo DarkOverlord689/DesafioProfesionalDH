@@ -36,7 +36,7 @@ Los administradores pueden gestionar el inventario de productos, categorías y s
 ## 📦 Clonar el repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/darksishop.git
+git clone https://github.com/DarkOverlord689/DesafioProfesionalDH.git
 cd darksishop
 ```
 
