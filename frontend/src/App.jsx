@@ -12,6 +12,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import GestionUsuarios from './components/GestionUsuarios';
 import ReservaProducto from './pages/ReservaProducto';
 import MisReservas from './pages/MisReservas';
+import WhatsappButton from './components/WhatsappButton';
 import './App.css';
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
           />
         </Routes>
       </main>
+      <WhatsappButton />
       <Footer />
     </div>
   );
