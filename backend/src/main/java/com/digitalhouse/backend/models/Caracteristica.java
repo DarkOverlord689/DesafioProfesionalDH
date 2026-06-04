@@ -1,6 +1,11 @@
 package com.digitalhouse.backend.models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Entity
@@ -10,7 +15,10 @@ public class Caracteristica {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
-    private String icono; // Ejemplo: "wifi", "pool", "kitchen"
+
+    @NotBlank(message = "El icono es obligatorio")
+    private String icono;
 }

@@ -1,8 +1,20 @@
 package com.digitalhouse.backend.models;
 
-import jakarta.persistence.*;
-import lombok.Data;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.util.List;
+import lombok.Data;
 
 @Entity
 @Table(name = "productos")
@@ -13,24 +25,26 @@ public class Producto {
     private Long id;
 
     @Column(nullable = false)
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
 
     @Column(length = 1000)
+    @NotBlank(message = "La descripcion es obligatoria")
+    @Size(max = 1000, message = "La descripcion no puede superar 1000 caracteres")
     private String descripcion;
 
-    // 1. CAMBIO: De String a Relación con la clase Categoria
     @ManyToOne
-    @JoinColumn(name = "categoria_id") // Hibernate creará esta columna como FK
+    @JoinColumn(name = "categoria_id")
+    @NotNull(message = "La categoria es obligatoria")
     private Categoria categoria;
 
+    @NotBlank(message = "La URL de la imagen es obligatoria")
     private String imagenUrl;
 
-    // 2. ADICIÓN: Relación para las características (HU #17)
     @ManyToMany
     @JoinTable(
-        name = "producto_caracteristica", // Nombre de la tabla intermedia
-        joinColumns = @JoinColumn(name = "producto_id"),
-        inverseJoinColumns = @JoinColumn(name = "caracteristica_id")
-    )
+            name = "producto_caracteristica",
+            joinColumns = @JoinColumn(name = "producto_id"),
+            inverseJoinColumns = @JoinColumn(name = "caracteristica_id"))
     private List<Caracteristica> caracteristicas;
 }

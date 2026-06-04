@@ -98,6 +98,13 @@
   box-shadow: 0 0 8px rgba(255, 204, 0, 0.4);
 }
 
+.field-error {
+  margin-top: -12px;
+  color: #ff8a8a;
+  font-size: 0.8rem;
+  text-align: left;
+}
+
 .btn-registro {
   width: 100%;
   padding: 15px;

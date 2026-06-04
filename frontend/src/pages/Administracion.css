@@ -38,3 +38,10 @@
   color: #d4af37;
   margin-bottom: 10px;
 }
+
+.admin-form .field-error {
+  display: block;
+  margin-top: -10px;
+  color: #ff8a8a;
+  font-size: 0.85rem;
+}

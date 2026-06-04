@@ -1,11 +1,18 @@
 package com.digitalhouse.backend.controllers;
 
 import com.digitalhouse.backend.models.Categoria;
-import com.digitalhouse.backend.repositories.CategoriaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
+import com.digitalhouse.backend.services.CategoriaService;
+import jakarta.validation.Valid;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/categorias")
@@ -13,20 +20,20 @@ import java.util.List;
 public class CategoriaController {
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private CategoriaService categoriaService;
 
     @GetMapping
     public List<Categoria> listarTodas() {
-        return categoriaRepository.findAll();
+        return categoriaService.listarTodas();
     }
 
     @PostMapping
-    public Categoria crear(@RequestBody Categoria categoria) {
-        return categoriaRepository.save(categoria);
+    public Categoria crear(@Valid @RequestBody Categoria categoria) {
+        return categoriaService.crear(categoria);
     }
 
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
-        categoriaRepository.deleteById(id);
+        categoriaService.eliminar(id);
     }
 }

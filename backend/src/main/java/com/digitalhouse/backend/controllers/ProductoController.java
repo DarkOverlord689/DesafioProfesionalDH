@@ -1,73 +1,57 @@
 package com.digitalhouse.backend.controllers;
 
 import com.digitalhouse.backend.models.Producto;
-import com.digitalhouse.backend.repositories.ProductoRepository;
+import com.digitalhouse.backend.services.ProductoService;
+import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/productos")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ProductoController {
 
     @Autowired
-    private ProductoRepository productoRepository;
+    private ProductoService productoService;
 
-    // Listar todos (Historia #10)
     @GetMapping
     public List<Producto> listar() {
-        return productoRepository.findAll();
+        return productoService.listar();
     }
 
-    // Registrar producto (Historia #3 - Validación nombre duplicado)
     @PostMapping
-    public ResponseEntity<?> crear(@RequestBody Producto producto) {
-        // 1. Limpiamos espacios
-        String nombreNuevo = producto.getNombre().trim();
-
-        // 2. Traemos TODO de la base para comparar (Forzamos lectura fresca)
-        List<Producto> todos = productoRepository.findAll();
-
-        boolean existe = todos.stream()
-                .anyMatch(p -> p.getNombre().trim().equalsIgnoreCase(nombreNuevo));
-
-        System.out.println("¿Existe el producto " + nombreNuevo + "? " + existe); // Esto saldrá en tu consola de Java
-
-        if (existe) {
-            return ResponseEntity.badRequest().body("Error: El nombre ya existe.");
-        }
-
-        return ResponseEntity.ok(productoRepository.save(producto));
+    public ResponseEntity<Producto> crear(@Valid @RequestBody Producto producto) {
+        return ResponseEntity.ok(productoService.crear(producto));
     }
 
-    // Eliminar producto (Historia #11 - Acción real en DB)
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id) {
-        if (productoRepository.existsById(id)) {
-            productoRepository.deleteById(id);
-            return ResponseEntity.ok("Producto eliminado correctamente");
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        productoService.eliminar(id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/buscar/categoria/{cat}")
     public List<Producto> filtrar(@PathVariable String cat) {
-        return productoRepository.findByCategoriaIgnoreCase(cat);
+        return productoService.filtrarPorCategoria(cat);
     }
 
     @GetMapping("/buscar/nombre")
     public List<Producto> buscar(@RequestParam String nombre) {
-        return productoRepository.findByNombreContainingIgnoreCase(nombre);
+        return productoService.buscarPorNombre(nombre);
     }
 
-    @GetMapping("/detalle/{id}")
+    @GetMapping({"/detalle/{id}", "/{id}"})
     public ResponseEntity<Producto> obtenerPorId(@PathVariable Long id) {
-        return productoRepository.findById(id)
-                .map(producto -> ResponseEntity.ok(producto))
-                .orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok(productoService.obtenerPorId(id));
     }
 }

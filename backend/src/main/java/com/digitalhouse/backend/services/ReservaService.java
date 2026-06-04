@@ -19,11 +19,19 @@ public class ReservaService {
         return reservaRepository.findByUsuarioId(id);
     }
 
+    public List<Reserva> buscarPorProductoId(Long productoId) {
+        return reservaRepository.findByProductoId(productoId);
+    }
+
     public List<Reserva> listarTodas() {
         return reservaRepository.findAll();
     }
 
     public Reserva guardar(Reserva reserva) {
+        if (reserva.getFechaInicio().isAfter(reserva.getFechaFin())) {
+            throw new IllegalArgumentException("La fecha de inicio no puede ser posterior a la fecha de fin");
+        }
+
         Reserva reservaGuardada = reservaRepository.save(reserva);
 
         try {

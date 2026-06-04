@@ -2,39 +2,38 @@ package com.digitalhouse.backend.controllers;
 
 import com.digitalhouse.backend.models.Reserva;
 import com.digitalhouse.backend.services.ReservaService;
-import com.digitalhouse.backend.repositories.ReservaRepository;
+import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/reservas")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ReservaController {
 
     @Autowired
     private ReservaService reservaService;
 
-    @Autowired
-    private ReservaRepository reservaRepository;
-
-    // Listar por producto
     @GetMapping("/producto/{productoId}")
     public List<Reserva> listarPorProducto(@PathVariable Long productoId) {
-        return reservaRepository.findByProductoId(productoId);
+        return reservaService.buscarPorProductoId(productoId);
     }
 
-    // Listar por usuario (Para el historial HU #33)
     @GetMapping("/usuario/{id}")
     public ResponseEntity<List<Reserva>> listarPorUsuario(@PathVariable Long id) {
         return ResponseEntity.ok(reservaService.buscarPorUsuarioId(id));
     }
 
-    // Crear reserva (HU #32)
     @PostMapping
-    public ResponseEntity<Reserva> crearReserva(@RequestBody Reserva reserva) {
+    public ResponseEntity<Reserva> crearReserva(@Valid @RequestBody Reserva reserva) {
         return ResponseEntity.ok(reservaService.guardar(reserva));
     }
 
